@@ -1,0 +1,12 @@
+{
+    "canisters": {
+        "challenge": {
+            "type": "custom",
+            "main": "src/challenge.ts",
+            "candid": "src/dids/challenge.did",
+            "build": "npx azle challenge",
+            "wasm": ".azle/challenge/challenge.wasm",
+            "gzip": true
+        }
+    }
+}
