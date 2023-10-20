@@ -1,17 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
-import DatePicker from 'react-datepicker';
 
 const SuggestModal = (props) => {
     const [title, setTitle] = useState();
     const [desc, setDesc] = useState();
-    const [amount, setAmount] = useState();
-    const [endDate, setEndDate] = useState(new Date());
 
     const titleRef = useRef();
     const descRef = useRef();
-    const amountRef = useRef();
 
     return (
         <>
@@ -20,7 +16,7 @@ const SuggestModal = (props) => {
                     <ExistWrap>
                         <ModalTitle>
                             <div>참여하기</div>
-                            <TitleIconImg alt="" src="images/dia.png" />
+                            <TitleIconImg alt="" src="images/participate.png" />
                         </ModalTitle>
                         <ExistBtn
                             onClick={() => {
@@ -56,9 +52,6 @@ const SuggestModal = (props) => {
                             <BigTextInput
                                 ref={descRef}
                                 contentEditable={true}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Tab') setAmount('');
-                                }}
                                 onClick={(e) => {
                                     const innerText = e.target.innerText;
                                     if (innerText == '내용을 입력해 주세요.') setDesc('');

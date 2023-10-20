@@ -14,6 +14,7 @@ import SuggestModal from './modal/SuggestModal.jsx';
 const Header = () => {
     const [login, setLogin] = useState(false);
     const [modal, setModal] = useState(false);
+    const [moveProfile, setMoveProfile] = useState();
 
     // useEffect(() => {
     // }, []);
