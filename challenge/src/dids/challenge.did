@@ -1,6 +1,8 @@
 service: () -> {
+    buyToken: (nat64) -> (bool) query;
     completeChallenge: (text) -> (bool);
     createChallenge: (text, text, nat64) -> (text);
+    getBalance: () -> (nat64) query;
     joinChallenge: (text) -> (bool);
     rewardParticipants: (text) -> (bool);
 }
