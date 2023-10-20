@@ -20,7 +20,7 @@ const SuggestModal = (props) => {
                     <ExistWrap>
                         <ModalTitle>
                             <div>챌린지 제안</div>
-                            {/* <TitleIconImg alt="" src="images/dia.png" /> */}
+                            <TitleIconImg alt="" src="images/dia.png" />
                         </ModalTitle>
                         <ExistBtn
                             onClick={() => {
