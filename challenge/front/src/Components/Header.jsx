@@ -14,21 +14,31 @@ const Header = () => {
     return (
         <Connect2ICProvider client={client}>
             <AllWrap>
-                <div>title</div>
-                <div>
-                    <Link to="/"> Home(참여하기) </Link>
-                    <Link to="/suggest"> +(제안하기) </Link>
-                    <Link to="/profile"> wallet or profile </Link>
-                </div>
-                <div
-                    className="auth-section"
-                    onClick={() => {
-                        console.log('클릭');
-                    }}
-                >
-                    <ConnectButton />
-                </div>
-                <ConnectDialog />
+                <HeaderWrap>
+                    <div>1000 icp</div> {/* or <div/>*/}
+                    <div>
+                        <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
+                            {' '}
+                            Home(참여하기){' '}
+                        </Link>
+                        <Link to="/suggest" style={{ color: 'black', textDecoration: 'none' }}>
+                            {' '}
+                            +(제안하기){' '}
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/profile"> wallet or profile </Link>
+                        <div
+                            className="auth-section"
+                            onClick={() => {
+                                console.log('클릭');
+                            }}
+                        >
+                            <ConnectButton />
+                        </div>
+                        <ConnectDialog />
+                    </div>
+                </HeaderWrap>
             </AllWrap>
         </Connect2ICProvider>
     );
@@ -38,8 +48,21 @@ export default Header;
 
 const AllWrap = styled.div`
     height: 80px;
-    padding: 0px 40px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #ebebeb;
+`;
+
+const HeaderWrap = styled.div`
+    width: 1400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
 `;

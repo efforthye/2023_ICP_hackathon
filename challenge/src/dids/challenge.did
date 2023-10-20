@@ -1,4 +1,6 @@
 service: () -> {
-    getMessage: () -> (text) query;
-    setMessage: (text) -> ();
+    completeChallenge: (text) -> (bool);
+    createChallenge: (text, text, nat64) -> (text);
+    joinChallenge: (text) -> (bool);
+    rewardParticipants: (text) -> (bool);
 }

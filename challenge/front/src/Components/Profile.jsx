@@ -3,17 +3,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Suggest = () => {
+const Profile = () => {
     return (
         <>
             <AllWrap>
-                <div>suggest</div>
+                <div>profile</div>
             </AllWrap>
         </>
     );
 };
 
-export default Suggest;
+export default Profile;
 
 const AllWrap = styled.div`
     /* background-color: red; */
