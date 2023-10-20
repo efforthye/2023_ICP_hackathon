@@ -109,6 +109,7 @@ const AllWrap = styled.div`
     left: 0;
     right: 0;
     border-bottom: 1px solid #ebebeb;
+    z-index: 1;
 `;
 
 const HeaderWrap = styled.div`
