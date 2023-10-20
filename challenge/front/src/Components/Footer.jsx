@@ -15,7 +15,9 @@ const Footer = () => {
         <Connect2ICProvider client={client}>
             <AllWrap>
                 <FooterWrap>
-                    <div>하이</div>
+                    <FooterTextWrap>
+                        <div>2023 ICP x Code States Hackathon.</div>
+                    </FooterTextWrap>
                 </FooterWrap>
             </AllWrap>
         </Connect2ICProvider>
@@ -26,7 +28,7 @@ export default Footer;
 
 const AllWrap = styled.div`
     display: flex;
-    padding: 40px 10px 120px 10px;
+    padding: 60px 10px 120px 10px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -36,9 +38,15 @@ const AllWrap = styled.div`
 
 const FooterWrap = styled.div`
     display: flex;
-    width: 1040px;
+    width: 1400px;
     flex-direction: column;
     align-items: flex-start;
     gap: 40px;
     height: 180px;
+    padding: 10px;
+    box-sizing: border-box;
+`;
+
+const FooterTextWrap = styled.div`
+    color: white;
 `;
