@@ -89,6 +89,10 @@ export default Canister({
         return tokenInfo.name;
     }),
 
+    whoami: query([], text, () => {
+        return getCaller();
+    }),
+
     ticker: query([], text, () => {
         return tokenInfo.ticker;
     }),
@@ -110,7 +114,7 @@ export default Canister({
     }),
 
     transfer: update([nat64], bool, (amount) => {
-        // This is kept assuming you want to allow admins to transfer to others
+        // 무조건 admin에게 보내야하기 때문에 from만 입력받음.
         const fromAddress = getCaller();
         const fromAccountOpt = getAccountByAddress(fromAddress);
         if ('None' in fromAccountOpt) {

@@ -12,4 +12,5 @@ service: () -> {
     ticker: () -> (text) query;
     totalSupply: () -> (nat64) query;
     transfer: (nat64) -> (bool);
+    whoami: () -> (text) query;
 }
