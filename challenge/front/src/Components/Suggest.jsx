@@ -16,5 +16,5 @@ const Suggest = () => {
 export default Suggest;
 
 const AllWrap = styled.div`
-    padding: 40px;
+    /* background-color: red; */
 `;
