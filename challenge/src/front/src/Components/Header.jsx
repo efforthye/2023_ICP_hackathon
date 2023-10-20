@@ -2,22 +2,30 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { createClient } from '@connect2ic/core';
-import { defaultProviders } from '@connect2ic/core/providers';
 import { ConnectButton, ConnectDialog, Connect2ICProvider } from '@connect2ic/react';
-import '@connect2ic/core/style.css';
-import { IDL } from '@dfinity/candid';
 import client from '../modules/client.js';
 import SuggestModal from './modal/SuggestModal.jsx';
 // console.log({ client });
 
+import { AuthClient } from '@dfinity/auth-client';
+
+function getPrincipal() {
+    const name = 'principal';
+    var cookieArray = document.cookie.split('; ');
+    for (var i = 0; i < cookieArray.length; i++) {
+        var cookie = cookieArray[i];
+        var keyValue = cookie.split('=');
+        if (keyValue[0] === name) {
+            return keyValue[1];
+        }
+    }
+    return '';
+}
+
 const Header = () => {
     const [login, setLogin] = useState(false);
     const [modal, setModal] = useState(false);
-    const [moveProfile, setMoveProfile] = useState();
-
-    // useEffect(() => {
-    // }, []);
+    const [principal, setPrincipal] = useState();
 
     return (
         <Connect2ICProvider client={client}>
@@ -70,10 +78,10 @@ const Header = () => {
                                         <WalletImg alt="" src="images/profile.png" />
                                         {/* 해당 아이디의 프로필로 이동하기 */}
                                         <Link
-                                            to={`/profile/${1564342423}`}
+                                            to={`/profile/${principal}`}
                                             style={{ color: 'black', textDecoration: 'none' }}
                                         >
-                                            1564342423
+                                            {principal}
                                         </Link>
                                     </ProfileWrap>
                                 </UserInfoWrap>
@@ -82,9 +90,16 @@ const Header = () => {
                             <>
                                 {/* 상태값에 따라 미 로그인 상태라면 띄움 */}
                                 <ConnectBtn
-                                    onClick={() => {
-                                        setLogin(true);
-                                        alert('연결 요청 보내기');
+                                    onClick={async () => {
+                                        const authClient = await AuthClient.create();
+                                        const principal = await authClient.getIdentity().getPrincipal();
+
+                                        document.cookie = `principal=${principal}`;
+                                        const cookie = await getPrincipal();
+                                        console.log({ cookie });
+                                        setPrincipal(cookie);
+
+                                        setLogin(cookie ? true : false);
                                     }}
                                 >
                                     <div>Connect</div>

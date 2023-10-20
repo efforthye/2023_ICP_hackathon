@@ -1,13 +1,17 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
 
 const SuggestModal = (props) => {
     const [title, setTitle] = useState();
     const [desc, setDesc] = useState();
+    const [amount, setAmount] = useState();
+    const [endDate, setEndDate] = useState(new Date());
 
     const titleRef = useRef();
     const descRef = useRef();
+    const amountRef = useRef();
 
     return (
         <>
@@ -15,8 +19,8 @@ const SuggestModal = (props) => {
                 <ModalWrap>
                     <ExistWrap>
                         <ModalTitle>
-                            <div>참여하기</div>
-                            <TitleIconImg alt="" src="images/participate.png" />
+                            <div>챌린지 제안</div>
+                            <TitleIconImg alt="" src="images/dia.png" />
                         </ModalTitle>
                         <ExistBtn
                             onClick={() => {
@@ -26,13 +30,9 @@ const SuggestModal = (props) => {
                             X
                         </ExistBtn>
                     </ExistWrap>
-                    <div>
-                        <TextTitle></TextTitle>
-                        <Description>선택한 챌린지에 대한 설명 출력 설명설명 ㅇㅅㅇ;;</Description>
-                    </div>
                     <ContentsWrap>
                         <InputWrap>
-                            <TextTitle>제목</TextTitle>
+                            <TextTitle>챌린지 제목</TextTitle>
                             <TextInput
                                 ref={titleRef}
                                 contentEditable={true}
@@ -48,10 +48,13 @@ const SuggestModal = (props) => {
                             </TextInput>
                         </InputWrap>
                         <InputWrap>
-                            <TextTitle>참여 내용</TextTitle>
+                            <TextTitle>챌린지 내용</TextTitle>
                             <BigTextInput
                                 ref={descRef}
                                 contentEditable={true}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Tab') setAmount('');
+                                }}
                                 onClick={(e) => {
                                     const innerText = e.target.innerText;
                                     if (innerText == '내용을 입력해 주세요.') setDesc('');
@@ -59,6 +62,32 @@ const SuggestModal = (props) => {
                             >
                                 {desc ?? '내용을 입력해 주세요.'}
                             </BigTextInput>
+                        </InputWrap>
+                        <InputWrap>
+                            <TextTitle>챌린지 DFC 상금</TextTitle>
+                            <TextInput
+                                ref={amountRef}
+                                contentEditable={true}
+                                onClick={(e) => {
+                                    const innerText = e.target.innerText;
+                                    if (innerText == '상금을 입력해 주세요.') setAmount('');
+                                }}
+                            >
+                                {amount ?? '상금을 입력해 주세요.'}
+                            </TextInput>
+                        </InputWrap>
+                        <InputWrap className={'date-input'}>
+                            <TextTitle htmlFor="input-game-date">챌린지 마감일</TextTitle>
+                            <DatePicker
+                                id="input-game-date"
+                                selected={endDate}
+                                onChange={(date) => {
+                                    setEndDate(date);
+                                }}
+                                dateFormat="yyyy년 MM월 dd일"
+                            />
+
+                            <DatePickImg alt="" src="images/date.png" />
                         </InputWrap>
                     </ContentsWrap>
                     <BtnWrap>
@@ -72,13 +101,14 @@ const SuggestModal = (props) => {
                         <SubmitBtn
                             onClick={() => {
                                 props.modalSet(false);
-                                alert('참여를 시작합니다.');
+                                alert('제안을 시작합니다.');
                                 const title = titleRef.current.textContent;
                                 const desc = descRef.current.textContent;
-                                console.log({ title, desc });
+                                const amount = amountRef.current.textContent;
+                                console.log({ title, desc, amount, endDate });
                             }}
                         >
-                            참여하기
+                            제안하기
                         </SubmitBtn>
                     </BtnWrap>
                 </ModalWrap>
@@ -90,15 +120,14 @@ const SuggestModal = (props) => {
 export default React.memo(SuggestModal);
 
 const AllWrap = styled.div`
-    background-color: #0000004e;
+    background-color: #00000082;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     position: absolute;
     left: 0;
     top: 0;
     display: flex;
     align-items: center;
-    z-index: 2;
 `;
 
 const ModalWrap = styled.div`
@@ -134,16 +163,6 @@ const ModalTitle = styled.div`
     margin-left: 35px;
     display: flex;
     align-items: center;
-`;
-
-const Description = styled.div`
-    /* height: 100px; */
-    /* background-color: red; */
-    font-size: 16px;
-    font-weight: 300;
-    margin-left: 35px;
-    /* display: flex; */
-    /* align-items: center; */
 `;
 
 const TitleIconImg = styled.img`
