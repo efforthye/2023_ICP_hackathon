@@ -6,6 +6,67 @@ import styled from 'styled-components';
 const Home = () => {
     return (
         <>
+            <HomeText>Top. 8</HomeText>
+            <ChallengeAllWrap>
+                <ChallengeBox>
+                    <div>제목</div>
+                    <div>이미지</div>
+                    <div>내용 요약</div>
+                    <div>작성 시각</div>
+                    <div>참여하기</div>
+                </ChallengeBox>
+                <ChallengeBox>
+                    <div>제목</div>
+                    <div>이미지</div>
+                    <div>내용 요약</div>
+                    <div>작성 시각</div>
+                    <div>참여하기</div>
+                </ChallengeBox>
+                <ChallengeBox>
+                    <div>제목</div>
+                    <div>이미지</div>
+                    <div>내용 요약</div>
+                    <div>작성 시각</div>
+                    <div>참여하기</div>
+                </ChallengeBox>
+                <ChallengeBox>
+                    <div>제목</div>
+                    <div>이미지</div>
+                    <div>내용 요약</div>
+                    <div>작성 시각</div>
+                    <div>참여하기</div>
+                </ChallengeBox>
+                <ChallengeBox>
+                    <div>제목</div>
+                    <div>이미지</div>
+                    <div>내용 요약</div>
+                    <div>작성 시각</div>
+                    <div>참여하기</div>
+                </ChallengeBox>
+                <ChallengeBox>
+                    <div>제목</div>
+                    <div>이미지</div>
+                    <div>내용 요약</div>
+                    <div>작성 시각</div>
+                    <div>참여하기</div>
+                </ChallengeBox>
+                <ChallengeBox>
+                    <div>제목</div>
+                    <div>이미지</div>
+                    <div>내용 요약</div>
+                    <div>작성 시각</div>
+                    <div>참여하기</div>
+                </ChallengeBox>
+                <ChallengeBox>
+                    <div>제목</div>
+                    <div>이미지</div>
+                    <div>내용 요약</div>
+                    <div>작성 시각</div>
+                    <div>참여하기</div>
+                </ChallengeBox>
+            </ChallengeAllWrap>
+
+            <HomeText>Latest</HomeText>
             <ChallengeAllWrap>
                 <ChallengeBox>
                     <div>제목</div>
@@ -83,6 +144,13 @@ const Home = () => {
 };
 
 export default Home;
+
+const HomeText = styled.div`
+    padding: 10px;
+    margin-top: 50px;
+    font-weight: 700;
+    font-size: 20px;
+`;
 
 const ChallengeAllWrap = styled.div`
     border-radius: 10px;

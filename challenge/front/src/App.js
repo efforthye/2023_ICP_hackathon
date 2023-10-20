@@ -4,6 +4,7 @@ import Header from './Components/Header.jsx';
 import Home from './Components/Home.jsx';
 import Suggest from './Components/Suggest.jsx';
 import Profile from './Components/Profile.jsx';
+import Footer from './Components/Footer.jsx';
 
 function App() {
     // 일단 icp에 요청을 보내서 처음에 user 정보를 cookie에 가지고 있다가
@@ -23,14 +24,17 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
                 </Routes>
             </AllWrap>
-            <Height80Box />
-            {/* 푸터 만들기 */}
+            <Height60Box />
+            <Footer />
         </>
     );
 }
 
 export default App;
 
+const Height60Box = styled.div`
+    height: 60px;
+`;
 const Height80Box = styled.div`
     height: 80px;
 `;
@@ -39,4 +43,5 @@ const AllWrap = styled.div`
     width: 1400px;
     margin: 10px auto;
     box-sizing: border-box;
+    min-height: 800px;
 `;
