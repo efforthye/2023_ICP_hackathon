@@ -11,7 +11,7 @@
         "front": {
             "dependencies": ["challenge"],
             "frontend": {
-                "entrypoint": "front/src/index.js"
+                "entrypoint": "front/src/index.html"
             },
             "source": ["front/public", "dist/front/"],
             "type": "assets"

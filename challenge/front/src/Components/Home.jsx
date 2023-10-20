@@ -6,9 +6,18 @@ import styled from 'styled-components';
 const Home = () => {
     return (
         <>
-            <HomeText>Top. 8</HomeText>
+            <TopText>Top. 8 Challenge</TopText>
             <ChallengeAllWrap>
                 {/* 8개 */}
+                {/* {challenges.map((challenge, index) => (
+                <ChallengeBox key={index}>
+                <div>{challenge.title}</div>
+                <div>{challenge.image}</div>
+                <div>{challenge.summary}</div>
+                <div>{challenge.timestamp}</div>
+                <div>참여하기</div>
+                </ChallengeBox>
+                ))} */}
                 <ChallengeBox>
                     <div>제목</div>
                     <div>이미지</div>
@@ -67,7 +76,7 @@ const Home = () => {
                 </ChallengeBox>
             </ChallengeAllWrap>
 
-            <HomeText>Latest</HomeText>
+            <LatestText>Latest Challenge</LatestText>
             <ChallengeAllWrap>
                 {/* 12개 */}
                 <ChallengeBox>
@@ -147,7 +156,18 @@ const Home = () => {
 
 export default Home;
 
-const HomeText = styled.div`
+const TopText = styled.div`
+    padding: 10px;
+    margin-top: 50px;
+    font-weight: 700;
+    font-size: 20px;
+    /* background: linear-gradient(0deg, #ff3263 25.49%, #6d6aff 92.08%); */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: red;
+`;
+const LatestText = styled.div`
     padding: 10px;
     margin-top: 50px;
     font-weight: 700;
@@ -156,7 +176,8 @@ const HomeText = styled.div`
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-color: red;
+    background-color: #1194cd;
+    /* background-color: red; */
 `;
 
 const ChallengeAllWrap = styled.div`
