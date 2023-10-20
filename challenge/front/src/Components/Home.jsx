@@ -24,6 +24,7 @@ const Home = () => {
                     <div>내용 요약</div>
                     <div>작성 시각</div>
                     <div>참여하기</div>
+                    <div>상금</div>
                 </ChallengeBox>
                 <ChallengeBox>
                     <div>제목</div>

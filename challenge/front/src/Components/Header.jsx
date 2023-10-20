@@ -62,12 +62,16 @@ const Header = () => {
                                     <WalletWrap>
                                         <WalletImg alt="" src="images/wallet.png" />
                                         <div>
-                                            <div>1000 DFC</div>
+                                            <div>{addCommasToNumber(1000)} DFC</div>
                                         </div>
                                     </WalletWrap>
                                     <ProfileWrap>
                                         <WalletImg alt="" src="images/profile.png" />
-                                        <Link to="/profile" style={{ color: 'black', textDecoration: 'none' }}>
+                                        {/* 해당 아이디의 프로필로 이동하기 */}
+                                        <Link
+                                            to={`/profile/${1564342423}`}
+                                            style={{ color: 'black', textDecoration: 'none' }}
+                                        >
                                             1564342423
                                         </Link>
                                     </ProfileWrap>
@@ -208,3 +212,22 @@ const WalletImg = styled.img`
 // {
 //     /* <ConnectDialog /> */
 // }
+
+// function addCommasToNumber(number) {
+//     // 숫자를 문자열로 변환
+//     console.log(number.type);
+
+//     let numberStr;
+//     if (number.type == 'number') {
+//         numberStr = number.toString();
+//     } else {
+//         numberStr = number;
+//     }
+
+//     // 천 단위마다 컴마 추가
+//     return numberStr.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+// }
+
+function addCommasToNumber(number) {
+    return number.toLocaleString();
+}
