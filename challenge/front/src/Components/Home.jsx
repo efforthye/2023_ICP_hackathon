@@ -17,7 +17,7 @@ const Home = () => {
                             </DescText>
                         </ContentWrap>
                         <EtcWrap>
-                            <DFCWrap>{1000} DFC</DFCWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
                             <div>
                                 <TimeWrap>
                                     <TimeText>start</TimeText>
@@ -51,7 +51,7 @@ const Home = () => {
                             </DescText>
                         </ContentWrap>
                         <EtcWrap>
-                            <DFCWrap>{1000} DFC</DFCWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
                             <div>
                                 <TimeWrap>
                                     <TimeText>start</TimeText>
@@ -89,7 +89,7 @@ const Home = () => {
                             </DescText>
                         </ContentWrap>
                         <EtcWrap>
-                            <DFCWrap>{1000} DFC</DFCWrap>
+                            <LatestDFCWrap>{1000} DFC</LatestDFCWrap>
                             <div>
                                 <TimeWrap>
                                     <TimeText>start</TimeText>
@@ -250,6 +250,14 @@ const EightBtn = styled.div`
         font-weight: 600;
     }
 `;
+const LatestBtn = styled.div`
+    background: linear-gradient(0deg, #ff3263 25.49%, #6d6aff 92.08%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: transparent; /* 텍스트 색상을 투명으로 설정 */
+    color: white; /* 텍스트의 색상을 하양(white)으로 설정 */
+`;
 
 // {/* 8개 */}
 // {/* {challenges.map((challenge, index) => (
@@ -280,7 +288,7 @@ const TimeText = styled.div`
 const Time = styled.div`
     /* color: #18181899; */
 `;
-const DFCWrap = styled.div`
+const EightDFCWrap = styled.div`
     margin-bottom: 10px;
     /* background: linear-gradient(0deg, #ff3263 25.49%, #6d6aff 92.08%);
     background-clip: text;
@@ -288,4 +296,13 @@ const DFCWrap = styled.div`
     -webkit-text-fill-color: transparent;
     background-color: #1194cd; */
     color: red;
+`;
+
+const LatestDFCWrap = styled.div`
+    margin-bottom: 10px;
+    background: linear-gradient(0deg, #ff3263 25.49%, #6d6aff 92.08%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: #1194cd;
 `;
