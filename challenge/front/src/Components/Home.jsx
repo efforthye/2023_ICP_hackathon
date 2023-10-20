@@ -82,17 +82,28 @@ const Home = () => {
             <ChallengeAllWrap>
                 <ChallengeBoxWrap>
                     <ChallengeBox className="original">
-                        <div>
-                            <TitleText>제목</TitleText>
-                            <DescText>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</DescText>
-                        </div>
-                        <div>
-                            <div>작성 시각</div>
-                            <div>만료 시각</div>
-                            <div>상금</div>
-                        </div>
+                        <ContentWrap>
+                            <TitleText>이거이거 해주세용</TitleText>
+                            <DescText>
+                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <DFCWrap>{1000} DFC</DFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>start</TimeText>
+                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>end</TimeText>
+                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
                     </ChallengeBox>
                     <OverlayBox className="overlay">
+                        <OverlayText>내용내내용내용내용내용내용내용내용내용</OverlayText>
                         <EightBtn
                             onClick={() => {
                                 // 참여하기 모달 띄우기
