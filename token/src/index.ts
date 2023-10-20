@@ -43,6 +43,9 @@ function insertAccount(address: text, account: typeof Account): typeof Account {
 export default Canister({
     initialize: update([text, text, nat64], text, (name, ticker, totalSupply) => {
         const ownerAddress = getCaller();
+        if (ownerAddress !== tokenInfo.owner && tokenInfo.owner !== '') {
+            throw new Error('Only admin can initialize');
+        }
         const creatorAccount: typeof Account = {
             address: ownerAddress,
             balance: totalSupply,
@@ -113,7 +116,38 @@ export default Canister({
         return accountOpt.Some.balance;
     }),
 
-    transfer: update([nat64], bool, (amount) => {
+    transferReward: update([text, nat64], bool, (to, amount) => {
+        //from은 무조건 admin. admin이 reward를 줘야함.
+        const caller = getCaller();
+        if (!isAdmin(caller)) {
+            throw new Error('Only admins can transfer reward');
+        }
+        const adminAccountOpt = getAccountByAddress(caller);
+        if ('None' in adminAccountOpt) {
+            throw new Error('adminAccount not found');
+        }
+        const adminAccount = adminAccountOpt.Some;
+        const toAccountOpt = getAccountByAddress(to);
+        if ('None' in toAccountOpt) {
+            const newAccount: typeof Account = {
+                address: to,
+                balance: amount,
+            };
+            adminAccount.balance -= amount;
+            insertAccount(to, newAccount);
+            insertAccount(tokenInfo.owner, adminAccount);
+            return true;
+        } else {
+            const toAccount = toAccountOpt.Some;
+            toAccount.balance += amount;
+            adminAccount.balance -= amount;
+            insertAccount(to, toAccount);
+            insertAccount(tokenInfo.owner, adminAccount);
+            return true;
+        }
+    }),
+
+    payToAdmin: update([nat64], bool, (amount) => {
         // 무조건 admin에게 보내야하기 때문에 from만 입력받음.
         const fromAddress = getCaller();
         const fromAccountOpt = getAccountByAddress(fromAddress);
@@ -145,12 +179,19 @@ export default Canister({
         }
         const toAccountOpt = getAccountByAddress(to);
         if ('None' in toAccountOpt) {
-            throw new Error('Recipient account not found');
+            const newAccount: typeof Account = {
+                address: to,
+                balance: amount,
+            };
+            insertAccount(to, newAccount);
+        } else {
+            const toAccount = toAccountOpt.Some;
+            toAccount.balance += amount;
+            insertAccount(to, toAccount);
         }
-        const toAccount = toAccountOpt.Some;
-        toAccount.balance += amount;
+
         tokenInfo.totalSupply += amount; // 전체 발행된 토큰의 양 추가
-        insertAccount(to, toAccount);
+
         return true;
     }),
 
@@ -174,7 +215,7 @@ export default Canister({
         let burningAccount;
         const burningAccountOpt = getAccountByAddress('0');
         if ('None' in burningAccountOpt) {
-            const newBurningAccount = {
+            const newBurningAccount: typeof Account = {
                 address: '0',
                 balance: 0n,
             };
