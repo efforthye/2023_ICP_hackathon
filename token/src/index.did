@@ -9,8 +9,9 @@ service: () -> {
     mint: (text, nat64) -> (bool);
     name: () -> (text) query;
     owner: () -> (text) query;
+    payToAdmin: (nat64) -> (bool);
     ticker: () -> (text) query;
     totalSupply: () -> (nat64) query;
-    transfer: (nat64) -> (bool);
+    transferReward: (text, nat64) -> (bool);
     whoami: () -> (text) query;
 }
