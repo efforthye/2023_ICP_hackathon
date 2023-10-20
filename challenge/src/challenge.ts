@@ -8,6 +8,7 @@ export const Challenge = Record({
     participants: Vec(text), // Participants in the challenge
     completed: Vec(text), // Users who completed the challenge
     creator: text, // The creator of the challenge
+    createdAt: text,
 });
 
 let challenges = StableBTreeMap(text, Challenge, 0);
@@ -24,7 +25,8 @@ export default Canister({
     createChallenge: update([text, text, nat64], text, (title, description, reward) => {
         const id = Math.random().toString(36).substring(2); // Create a random unique ID
         const creator = getCaller();
-
+        const timestamp = Date.now();
+        const date = new Date(timestamp);
         const newChallenge = {
             id,
             title,
@@ -32,7 +34,7 @@ export default Canister({
             reward,
             participants: [],
             completed: [],
-            creator,
+            date,
         };
 
         challenges.insert(id, newChallenge);

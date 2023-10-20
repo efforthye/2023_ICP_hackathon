@@ -63,41 +63,8 @@ export default Canister({
         return state.values();
     }),
 
-    getAdmins: query([], Vec(text), () => {
-        return admins;
-    }),
-
-    addAdmin: update([text], bool, (address) => {
-        const caller = getCaller();
-        if (!isAdmin(caller)) {
-            return false;
-        }
-        admins.push(address);
-        return true;
-    }),
-
-    deleteAdmin: update([text], bool, (address) => {
-        const caller = getCaller();
-        if (!isAdmin(caller)) {
-            return false;
-        }
-        const indexToDelete = admins.indexOf(address);
-        if (indexToDelete !== -1) {
-            admins.splice(indexToDelete, 1);
-        }
-        return true;
-    }),
-
-    name: query([], text, () => {
-        return tokenInfo.name;
-    }),
-
     whoami: query([], text, () => {
         return getCaller();
-    }),
-
-    ticker: query([], text, () => {
-        return tokenInfo.ticker;
     }),
 
     totalSupply: query([], nat64, () => {
