@@ -42,7 +42,7 @@ const Header = () => {
                                     }}
                                 >
                                     <div>+</div>
-                                    <div>제안하기</div>
+                                    <div>챌린지 제안</div>
                                 </SuggestBtn>
                                 {/* 모달 */}
                                 {modal ? (
@@ -141,7 +141,7 @@ const RightWrap = styled.div`
 `;
 
 const SuggestBtn = styled.div`
-    width: 100px;
+    width: 120px;
     height: 32px;
     border-radius: 30px;
     background-color: black;
