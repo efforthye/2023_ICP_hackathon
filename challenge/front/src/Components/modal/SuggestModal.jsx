@@ -64,7 +64,7 @@ const SuggestModal = (props) => {
                             </BigTextInput>
                         </InputWrap>
                         <InputWrap>
-                            <TextTitle>총 DFC 상금</TextTitle>
+                            <TextTitle>챌린지 DFC 상금</TextTitle>
                             <TextInput
                                 ref={amountRef}
                                 contentEditable={true}
@@ -77,12 +77,11 @@ const SuggestModal = (props) => {
                             </TextInput>
                         </InputWrap>
                         <InputWrap className={'date-input'}>
-                            <TextTitle htmlFor="input-game-date">마감일을 선택하세요</TextTitle>
+                            <TextTitle htmlFor="input-game-date">챌린지 마감일</TextTitle>
                             <DatePicker
                                 id="input-game-date"
                                 selected={endDate}
                                 onChange={(date) => {
-                                    alert(date);
                                     setEndDate(date);
                                 }}
                                 dateFormat="yyyy년 MM월 dd일"
@@ -101,6 +100,8 @@ const SuggestModal = (props) => {
                         </CancelBtn>
                         <SubmitBtn
                             onClick={() => {
+                                props.modalSet(false);
+                                alert('제안을 시작합니다.');
                                 const title = titleRef.current.textContent;
                                 const desc = descRef.current.textContent;
                                 const amount = amountRef.current.textContent;
