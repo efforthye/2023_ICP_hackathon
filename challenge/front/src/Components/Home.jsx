@@ -10,17 +10,62 @@ const Home = () => {
             <ChallengeAllWrap>
                 <ChallengeBoxWrap>
                     <ChallengeBox className="original">
-                        <div>
-                            <TitleText>제목</TitleText>
-                            <DescText>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</DescText>
-                        </div>
-                        <div>
-                            <div>작성 시각</div>
-                            <div>만료 시각</div>
-                            <div>상금</div>
-                        </div>
+                        <ContentWrap>
+                            <TitleText>이거이거 해주세용</TitleText>
+                            <DescText>
+                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <DFCWrap>{1000} DFC</DFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>start</TimeText>
+                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>end</TimeText>
+                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
                     </ChallengeBox>
                     <OverlayBox className="overlay">
+                        <OverlayText>내용내내용내용내용내용내용내용내용내용</OverlayText>
+                        <EightBtn
+                            onClick={() => {
+                                // 참여하기 모달 띄우기
+                                alert('참여하기');
+                            }}
+                        >
+                            <div>참여하기</div>
+                        </EightBtn>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>이거이거 해주세용</TitleText>
+                            <DescText>
+                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <DFCWrap>{1000} DFC</DFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>start</TimeText>
+                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>end</TimeText>
+                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>내용내내용내용내용내용내용내용내용내용</OverlayText>
                         <EightBtn
                             onClick={() => {
                                 // 참여하기 모달 띄우기
@@ -97,7 +142,7 @@ const ChallengeBoxWrap = styled.div`
     height: 340px;
     border-radius: 10px;
     display: inline-block;
-    overflow: scroll;
+    overflow: hidden;
     background-color: white;
     box-sizing: border-box;
     position: relative;
@@ -112,13 +157,13 @@ const ChallengeBox = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    padding: 20px;
-    margin: 10px;
     cursor: pointer;
     &:hover + .overlay {
         display: block;
     }
-    height: 280px;
+    display: flex;
+    flex-direction: column; /* 수직으로 배치 */
+    justify-content: space-between;
 `;
 const OverlayBox = styled.div`
     position: absolute;
@@ -126,7 +171,8 @@ const OverlayBox = styled.div`
     /* top: 0; */
     width: 100%;
     height: 100%;
-    background-color: #2e2e2e20;
+    /* background-color: #2e2e2e20; */
+    background-color: #2e2e2ed2;
     backdrop-filter: blur(2px); /* 배경 흐리게 만들기 */
     display: flex;
     justify-content: center;
@@ -135,6 +181,26 @@ const OverlayBox = styled.div`
     &:hover,
     &.on {
         display: block;
+    }
+`;
+const OverlayText = styled.div`
+    padding: 15px 20px 0 20px;
+    color: white;
+    overflow: hidden;
+`;
+
+const ContentWrap = styled.div`
+    height: 120px;
+    padding: 10px;
+    margin: 10px;
+    overflow: scroll;
+`;
+const EtcWrap = styled.div`
+    background-color: black;
+    color: white;
+    & > div {
+        padding: 20px;
+        margin: 10px;
     }
 `;
 
@@ -184,3 +250,31 @@ const EightBtn = styled.div`
 // <div>참여하기</div>
 // </ChallengeBox>
 // ))} */}
+
+const BorderBar = styled.div`
+    height: 1px;
+    background: var(--gray-300, #e5e8eb);
+`;
+
+const TimeWrap = styled.div`
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+`;
+const TimeText = styled.div`
+    margin: 5px 5px 5px 0;
+    width: 40px;
+`;
+
+const Time = styled.div`
+    /* color: #18181899; */
+`;
+const DFCWrap = styled.div`
+    margin-bottom: 10px;
+    /* background: linear-gradient(0deg, #ff3263 25.49%, #6d6aff 92.08%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: #1194cd; */
+    color: red;
+`;

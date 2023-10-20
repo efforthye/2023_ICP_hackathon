@@ -231,7 +231,7 @@ const SubmitBtn = styled.div`
 
 const InputWrap = styled.div`
     position: relative;
-    margin-top: 20px;
+    margin-top: 30px;
     & > .react-datepicker-wrapper > div {
         text-align: center;
     }
@@ -253,6 +253,7 @@ const InputWrap = styled.div`
         line-height: 48px;
         padding-left: 65px;
         padding-right: 100px;
+        margin-bottom: 10px;
     }
 `;
 const TextTitle = styled.div`
