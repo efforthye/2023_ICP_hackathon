@@ -22,6 +22,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/suggest" element={<Suggest />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile/*" element={<Profile />} />
                 </Routes>
             </AllWrap>
             <Height60Box />

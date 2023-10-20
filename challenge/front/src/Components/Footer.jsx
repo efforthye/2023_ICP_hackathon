@@ -16,7 +16,8 @@ const Footer = () => {
             <AllWrap>
                 <FooterWrap>
                     <FooterTextWrap>
-                        <div>2023 ICP x Code States Hackathon.</div>
+                        <FooterTextDesc>2023 ICP x Code States Hackathon.</FooterTextDesc>
+                        <FooterText>Development Period: October 20, 2023, to October 21, 2023.</FooterText>
                     </FooterTextWrap>
                 </FooterWrap>
             </AllWrap>
@@ -49,4 +50,17 @@ const FooterWrap = styled.div`
 
 const FooterTextWrap = styled.div`
     color: white;
+`;
+
+const FooterText = styled.div`
+    margin-bottom: 15px;
+    /* background: linear-gradient(0deg, #ff3263 25.49%, #6d6aff 92.08%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: #1194cd; */
+`;
+const FooterTextDesc = styled.div`
+    font-size: 20px;
+    margin-bottom: 25px;
 `;
