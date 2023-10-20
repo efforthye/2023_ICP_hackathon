@@ -1,120 +1,168 @@
 // import axios from 'axios';
 // import { useEffect, useState } from 'react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import ParticipateModal from './modal/ParticipateModal.jsx';
 
 const Home = () => {
+    const [modal, setModal] = useState(false);
+
+    useEffect(() => {
+        if (modal) {
+            document.body.style.overflow = 'hidden'; // 모달이 열릴 때 스크롤 비활성화
+        } else {
+            document.body.style.overflow = 'auto'; // 모달이 닫힐 때 스크롤 활성화
+        }
+    }, [modal]);
+
     return (
         <>
             <TopText>Top. 8 Challenge</TopText>
             <ChallengeAllWrap>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                            <div>
+                {/* for */}
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText>이거이거 해주세용</TitleText>
+                                <DescText>
+                                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
                                 <TimeWrap>
-                                    <TimeText>start</TimeText>
-                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>time</Time>
                                 </TimeWrap>
                                 <TimeWrap>
-                                    <TimeText>end</TimeText>
-                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>time</Time>
                                 </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>내용내내용내용내용내용내용내용내용내용</OverlayText>
-                        <EightBtn
-                            onClick={() => {
-                                // 참여하기 모달 띄우기
-                                alert('참여하기');
-                            }}
-                        >
-                            <div>참여하기</div>
-                        </EightBtn>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                            <div>
+                                <DetailText>길다란 내용 내용 내용...</DetailText>
+                            </OverlayText>
+                            <EightBtn
+                                onClick={() => {
+                                    // 참여하기 모달 띄우기
+                                    setModal(true);
+                                    alert('참여하기');
+                                }}
+                            >
+                                <div>참여하기</div>
+                            </EightBtn>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                    {modal ? <ParticipateModal modalSet={setModal} /> : <></>}
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText>이거이거 해주세용</TitleText>
+                                <DescText>
+                                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
                                 <TimeWrap>
-                                    <TimeText>start</TimeText>
-                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>time</Time>
                                 </TimeWrap>
                                 <TimeWrap>
-                                    <TimeText>end</TimeText>
-                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>time</Time>
                                 </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>내용내내용내용내용내용내용내용내용내용</OverlayText>
-                        <EightBtn
-                            onClick={() => {
-                                // 참여하기 모달 띄우기
-                                alert('참여하기');
-                            }}
-                        >
-                            <div>참여하기</div>
-                        </EightBtn>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
+                                <DetailText>길다란 내용 내용 내용...</DetailText>
+                            </OverlayText>
+                            <EightBtn
+                                onClick={() => {
+                                    // 참여하기 모달 띄우기
+                                    setModal(true);
+                                    alert('참여하기');
+                                }}
+                            >
+                                <div>참여하기</div>
+                            </EightBtn>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                    {modal ? <ParticipateModal modalSet={setModal} /> : <></>}
+                </ContentAndOverlayWrap>
             </ChallengeAllWrap>
 
             <LatestText>Latest Challenge</LatestText>
-            <ChallengeAllWrap>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <LatestDFCWrap>{1000} DFC</LatestDFCWrap>
-                            <div>
-                                <TimeWrap>
-                                    <TimeText>start</TimeText>
-                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
-                                </TimeWrap>
-                                <TimeWrap>
-                                    <TimeText>end</TimeText>
-                                    <Time>언제언줴 시작~~ ㅇㅅㅇ;;</Time>
-                                </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>내용내내용내용내용내용내용내용내용내용</OverlayText>
-                        <EightBtn
-                            onClick={() => {
-                                // 참여하기 모달 띄우기
-                                alert('참여하기');
-                            }}
-                        >
-                            <div>참여하기</div>
-                        </EightBtn>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
-            </ChallengeAllWrap>
+            <ChallengeBoxWrap>
+                <ChallengeBox className="original">
+                    <ContentWrap>
+                        <TitleText>이거이거 해주세용</TitleText>
+                        <DescText>
+                            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        </DescText>
+                    </ContentWrap>
+                    <EtcWrap>
+                        <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                        <div>
+                            <TimeWrap>
+                                <TimeText>creater</TimeText>
+                                <Time>박혜림</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>participants</TimeText>
+                                <Time>{10}명 참여</Time>
+                            </TimeWrap>
+                        </div>
+                    </EtcWrap>
+                </ChallengeBox>
+                <OverlayBox className="overlay">
+                    <OverlayText>
+                        <TimeWrap>
+                            <TimeText>챌린지 시작일</TimeText>
+                            <Time>time</Time>
+                        </TimeWrap>
+                        <TimeWrap>
+                            <TimeText>챌린지 마감일</TimeText>
+                            <Time>time</Time>
+                        </TimeWrap>
+                        <DetailText>길다란 내용 내용 내용...</DetailText>
+                    </OverlayText>
+                    <EightBtn
+                        onClick={() => {
+                            // 참여하기 모달 띄우기
+                            alert('참여하기');
+                        }}
+                    >
+                        <div>참여하기</div>
+                    </EightBtn>
+                </OverlayBox>
+            </ChallengeBoxWrap>
         </>
     );
 };
@@ -146,6 +194,10 @@ const LatestText = styled.div`
 
 const ChallengeAllWrap = styled.div`
     border-radius: 10px;
+`;
+
+const ContentAndOverlayWrap = styled.div`
+    display: inline-block;
 `;
 
 const ChallengeBoxWrap = styled.div`
@@ -201,16 +253,17 @@ const OverlayText = styled.div`
 `;
 
 const ContentWrap = styled.div`
-    height: 120px;
+    /* height: 140px; */
     padding: 10px;
     margin: 10px;
     overflow: scroll;
 `;
 const EtcWrap = styled.div`
+    width: 330px;
     background-color: black;
     color: white;
     & > div {
-        padding: 20px;
+        padding: 10px;
         margin: 10px;
     }
 `;
@@ -223,6 +276,8 @@ const TitleText = styled.div`
 `;
 
 const DescText = styled.div`
+    height: 60px;
+    text-overflow: ellipsis;
     color: #18181899;
     font-weight: 450;
     margin-bottom: 40px;
@@ -281,20 +336,14 @@ const TimeWrap = styled.div`
     align-items: center;
 `;
 const TimeText = styled.div`
-    margin: 5px 5px 5px 0;
-    width: 40px;
+    margin: 5px 8px 5px 0;
+    /* width: 60px; */
 `;
 
 const Time = styled.div`
     /* color: #18181899; */
 `;
 const EightDFCWrap = styled.div`
-    margin-bottom: 10px;
-    /* background: linear-gradient(0deg, #ff3263 25.49%, #6d6aff 92.08%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-color: #1194cd; */
     color: red;
 `;
 
@@ -305,4 +354,8 @@ const LatestDFCWrap = styled.div`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-color: #1194cd;
+`;
+
+const DetailText = styled.div`
+    margin: 10px 0;
 `;
