@@ -5,6 +5,8 @@ import Home from './Components/Home.jsx';
 import Suggest from './Components/Suggest.jsx';
 import { useEffect, useState } from 'react';
 import LoadingScreen from './Components/Loading-screen.jsx';
+import Profile from './Components/Profile.jsx';
+import Footer from './Components/Footer.jsx';
 
 function App() {
     // 일단 icp에 요청을 보내서 처음에 user 정보를 cookie에 가지고 있다가
@@ -22,19 +24,27 @@ function App() {
     }, []);
 
     return (
-        <AllWrap className="App">
+        <>
             <Header />
-            {isLoading ? (
-                // 만약 isLoading이 true이면 로딩 화면을 표시합니다.
-                <LoadingScreen />
-            ) : (
-                // 그렇지 않으면 실제 내용을 표시합니다.
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/suggest" element={<Suggest />} />
-                </Routes>
-            )}
-        </AllWrap>
+            <Height80Box />
+            <AllWrap>
+                {isLoading ? (
+                    // 만약 isLoading이 true이면 로딩 화면을 표시합니다.
+                    <LoadingScreen />
+                ) : (
+                    // 그렇지 않으면 실제 내용을 표시합니다.
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/suggest" element={<Suggest />} />
+                        <Route path="/" element={<Home />} />
+                        <Route path="/suggest" element={<Suggest />} />
+                        <Route path="/profile" element={<Profile />} />
+                    </Routes>
+                )}
+            </AllWrap>
+            <Height80Box />
+            <Footer />
+        </>
     );
 }
 

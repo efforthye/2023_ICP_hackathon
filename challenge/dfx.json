@@ -7,6 +7,14 @@
             "build": "npx azle challenge",
             "wasm": ".azle/challenge/challenge.wasm",
             "gzip": true
+        },
+        "front": {
+            "dependencies": ["challenge"],
+            "frontend": {
+                "entrypoint": "front/src/index.js"
+            },
+            "source": ["front/public", "dist/front/"],
+            "type": "assets"
         }
     }
 }
