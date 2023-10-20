@@ -17,7 +17,7 @@ const Profile = () => {
     return (
         <>
             <AllWrap>
-                <div>profile</div>
+                <div>id : {profileId}</div>
             </AllWrap>
         </>
     );

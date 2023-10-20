@@ -1,10 +1,13 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
 
 const SuggestModal = (props) => {
     const [title, setTitle] = useState();
     const [desc, setDesc] = useState();
     const [amount, setAmount] = useState();
+    const [endDate, setEndDate] = useState(new Date());
 
     const titleRef = useRef();
     const descRef = useRef();
@@ -46,7 +49,7 @@ const SuggestModal = (props) => {
                         </InputWrap>
                         <InputWrap>
                             <TextTitle>챌린지 내용</TextTitle>
-                            <TextInput
+                            <BigTextInput
                                 ref={descRef}
                                 contentEditable={true}
                                 onKeyDown={(e) => {
@@ -58,7 +61,7 @@ const SuggestModal = (props) => {
                                 }}
                             >
                                 {desc ?? '내용을 입력해 주세요.'}
-                            </TextInput>
+                            </BigTextInput>
                         </InputWrap>
                         <InputWrap>
                             <TextTitle>총 DFC 상금</TextTitle>
@@ -72,6 +75,20 @@ const SuggestModal = (props) => {
                             >
                                 {amount ?? '상금을 입력해 주세요.'}
                             </TextInput>
+                        </InputWrap>
+                        <InputWrap className={'date-input'}>
+                            <TextTitle htmlFor="input-game-date">마감일을 선택하세요</TextTitle>
+                            <DatePicker
+                                id="input-game-date"
+                                selected={endDate}
+                                onChange={(date) => {
+                                    alert(date);
+                                    setEndDate(date);
+                                }}
+                                dateFormat="yyyy년 MM월 dd일"
+                            />
+
+                            <DatePickImg alt="" src="images/date.png" />
                         </InputWrap>
                     </ContentsWrap>
                     <BtnWrap>
@@ -87,7 +104,7 @@ const SuggestModal = (props) => {
                                 const title = titleRef.current.textContent;
                                 const desc = descRef.current.textContent;
                                 const amount = amountRef.current.textContent;
-                                console.log({ title, desc, amount });
+                                console.log({ title, desc, amount, endDate });
                             }}
                         >
                             제안하기
@@ -152,6 +169,14 @@ const TitleIconImg = styled.img`
     height: 35px;
     margin-left: 8px;
 `;
+const DatePickImg = styled.img`
+    width: 35px;
+    height: 35px;
+    margin-left: 8px;
+    position: absolute;
+    left: 10px;
+    top: 47px;
+`;
 
 const ContentsWrap = styled.div`
     padding: 0 40px;
@@ -204,7 +229,30 @@ const SubmitBtn = styled.div`
 `;
 
 const InputWrap = styled.div`
+    position: relative;
     margin-top: 20px;
+    & > .react-datepicker-wrapper > div {
+        text-align: center;
+    }
+    & > .react-datepicker-wrapper > div > input {
+        display: flex;
+        height: 48px;
+        padding: 10px 18px;
+        align-items: center;
+        gap: 12px;
+        border-radius: 5px;
+        border: 1px solid var(--grey-100, #e5e8eb);
+        background: var(--gray-100, #fafafb);
+        flex: 1 0 0;
+        color: var(--gray-700, #8d94a0);
+        font-family: Pretendard;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 48px;
+        padding-left: 65px;
+        padding-right: 100px;
+    }
 `;
 const TextTitle = styled.div`
     font-weight: 700;
@@ -212,6 +260,24 @@ const TextTitle = styled.div`
     margin-bottom: 10px;
 `;
 const TextInput = styled.div`
+    display: flex;
+    height: 48px;
+    padding: 10px 18px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 5px;
+    border: 1px solid var(--grey-100, #e5e8eb);
+    background: var(--gray-100, #fafafb);
+    flex: 1 0 0;
+    color: var(--gray-700, #8d94a0);
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 48px;
+`;
+
+const BigTextInput = styled.div`
     display: flex;
     height: 48px;
     padding: 10px 18px;
