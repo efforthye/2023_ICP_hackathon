@@ -40,5 +40,9 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "ts-loader": "^9.5.0",
+        "typescript": "^5.2.2"
     }
 }

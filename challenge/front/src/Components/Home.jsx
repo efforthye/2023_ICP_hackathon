@@ -9,6 +9,15 @@ const Home = () => {
             <HomeText>Top. 8</HomeText>
             <ChallengeAllWrap>
                 {/* 8개 */}
+                {/* {challenges.map((challenge, index) => (
+                <ChallengeBox key={index}>
+                <div>{challenge.title}</div>
+                <div>{challenge.image}</div>
+                <div>{challenge.summary}</div>
+                <div>{challenge.timestamp}</div>
+                <div>참여하기</div>
+                </ChallengeBox>
+                ))} */}
                 <ChallengeBox>
                     <div>제목</div>
                     <div>이미지</div>

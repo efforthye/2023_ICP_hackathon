@@ -15,29 +15,41 @@ const Header = () => {
         <Connect2ICProvider client={client}>
             <AllWrap>
                 <HeaderWrap>
-                    <div>1000 icp</div> {/* or <div/>*/}
-                    <div>
+                    {/* 클릭하면 Home으로 이동 */}
+                    <LogoWrap>
                         <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
-                            {' '}
-                            Home(참여하기){' '}
+                            <LogoImg alt="" src="images/difinity.png" />
+                            <div>DeFi CHALLENGE</div>
                         </Link>
+                    </LogoWrap>{' '}
+                    <RightWrap>
+                        {/* 로그인 상태라면 띄움 */}
+                        {/* 제안하기 버튼 */}
                         <Link to="/suggest" style={{ color: 'black', textDecoration: 'none' }}>
-                            {' '}
-                            +(제안하기){' '}
+                            <DefaultBtn>
+                                <div>+</div>
+                                <div>제안하기</div>
+                            </DefaultBtn>
                         </Link>
-                    </div>
-                    <div>
-                        <Link to="/profile"> wallet or profile </Link>
-                        <div
-                            className="auth-section"
-                            onClick={() => {
-                                console.log('클릭');
-                            }}
-                        >
-                            <ConnectButton />
-                        </div>
-                        <ConnectDialog />
-                    </div>
+                        {/* 해당 id의 프로필로 이동 */}
+                        <WalletWrap>
+                            <WalletImg alt="" src="images/wallet.png" />
+                            <div>
+                                <div>1000 DFC</div>
+                            </div>
+                        </WalletWrap>
+                        <ProfileWrap>
+                            <WalletImg alt="" src="images/profile.png" />
+                            <Link to="/profile" style={{ color: 'black', textDecoration: 'none' }}>
+                                1564342423
+                            </Link>
+                        </ProfileWrap>
+
+                        {/* 미 로그인 상태라면 띄움 */}
+                        {/* <DefaultBtn>
+                            <div>Connect</div>
+                        </DefaultBtn> */}
+                    </RightWrap>
                 </HeaderWrap>
             </AllWrap>
         </Connect2ICProvider>
@@ -66,3 +78,72 @@ const HeaderWrap = styled.div`
     padding: 0 10px;
     box-sizing: border-box;
 `;
+
+const LogoWrap = styled.div`
+    width: 400px;
+    & > a {
+        display: flex;
+        align-items: center;
+    }
+`;
+
+const LogoImg = styled.img`
+    width: 70px;
+    margin-right: 10px;
+`;
+
+const RightWrap = styled.div`
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+`;
+
+const DefaultBtn = styled.div`
+    width: 100px;
+    height: 32px;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+    font-weight: 900;
+    font-size: 30px;
+    text-align: center;
+    line-height: 32px;
+    display: flex;
+    & > div {
+        font-size: 16px;
+        margin-left: 3px;
+        font-weight: 600;
+    }
+    justify-content: center;
+    cursor: pointer;
+`;
+
+const WalletWrap = styled.div`
+    margin-left: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+const ProfileWrap = styled.div`
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const WalletImg = styled.img`
+    width: 30px;
+    margin-right: 10px;
+`;
+// {/* <div
+//     className="auth-section"
+//     onClick={() => {
+//         console.log('클릭');
+//     }}
+// >
+//     <ConnectButton />
+// </div> */}
+// {
+//     /* <ConnectDialog /> */
+// }
