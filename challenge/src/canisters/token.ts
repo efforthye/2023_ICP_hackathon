@@ -1,104 +1,46 @@
 import {
-    text,
     nat64,
     Record,
-    Vec,
-    Opt,
     update,
     ic,
-    bool,
     StableBTreeMap,
+    Vec,
     Canister,
+    text,
+    bool,
+    query,
+    Opt,
     Principal,
+    Variant,
     Err,
     Ok,
     Result,
-    Variant,
-    query,
-    int,
-    int8,
 } from 'azle';
 
-import TokenCanister from './token';
-/*
-지식인 -> 1명 채택
+const FREE_TOKEN = 1_000n;
+const BURNING_ACCOUNT_ID = Principal.fromUint8Array(new Uint8Array([0]));
 
-deadline안에 아무도 글 안달면 환불
-deadline안에 채택 안하면 단 애들 엔빵
-*/
-
-const User = Record({
-    /*
-     * id: 유저를 구분하는 id값, principal(address)
-     * createdAt: 유저 생성 날짜
-     * publishingChallengeIds: 유저가 발행한 챌린지 목록
-     * participatingChallengeIds: 유저가 참가중인 챌린지 목록
-     * completedChallengeIds: 유저가 완료한(보상까지 받은) 챌린지 목록
-     * username: 유저이름
-     **/
-    id: Principal,
-    createdAt: nat64,
-    publishingChallengeIds: Vec(Principal),
-    participatingChallengeIds: Vec(Principal),
-    rewardedChallengeIds: Vec(Principal),
-    username: text,
+const Allowances = Record({
+    spender: Principal,
+    amount: nat64,
 });
 
-const Response = Record({
-    /*
-     * id: 응답 아이디 값
-     * title: 응답 제목
-     * contents: 응답 내용
-     * responderId: 응답자
-     * chosen: 채택여부
-     **/
-    id: int8,
-    title: text,
-    contents: text /*? blob */,
-    responderId: Principal,
-    chosen: bool,
+const Account = Record({
+    address: Principal,
+    balance: nat64,
+    allowances: Vec(Allowances),
+});
+//key: address
+
+const tokenInfo = Record({
+    name: text,
+    ticker: text,
+    totalSupply: nat64,
+    owner: Principal,
 });
 
-const Challenge = Record({
-    /*
-     * id: 챌린지를 구분하는 id값
-     * title: 챌린지 제목
-     * description: 챌린지 설명
-     * reward: 챌린지 보상
-     * responses: 챌린지 응답 목록
-     * rewarded: 챌린지
-     * ongoing: 현재 챌린지가 진행중인지, 진행중이면 true
-     * createdAt: 챌린지를 만든 시간
-     * creator: 챌린지 만든 사람(owner)
-     * deadline: 챌린지 마감 시간
-     **/
-    id: Principal, // Unique challenge Id
-    title: text, // Title of the challenge
-    description: text, // Description of the challenge
-    reward: nat64, // Reward for completing the challenge
-    responses: Vec(Response), // Responses in the challenge
-    completed: Vec(User), // Users who completed the challenge, 보상 받을 예정 목록 한 명 골라야 함.
-    ongoing: bool, // Whether the challenge is ongoing
-    createdAt: nat64, // The time the challenge was created
-    creator: Principal, // The creator of the challenge
-    deadline: nat64,
-});
-
-// 발생 가능한 에러 목록.
-const ChallengeError = Variant({
-    ChallengeDoesNotExist: Principal,
-    ChallengeNotFinished: Principal,
-    ChallengeFinished: Principal,
-    UserDoesNotExist: Principal,
-    UserNotParticipant: Principal,
-    UserNotCreator: Principal,
-    UserAlreadyExist: Principal,
-    InsufficientToken: Principal,
-    ResponseDoesNotExist: int8,
-    CreatorNotEnoughBalance: Principal,
-    AlreadyParticipated: Principal,
-    InvalidUser: Principal,
-});
+let state = StableBTreeMap(Principal, Account, 0); // stable memory
+const admins: Vec<Principal> = [];
 
 const TokenError = Variant({
     OnlyAdminAccess: Principal,
@@ -106,251 +48,247 @@ const TokenError = Variant({
     InsufficientToken: Principal,
 });
 
-const tokenCanister = TokenCanister(Principal.fromText('be2us-64aaa-aaaaa-qaabq-cai'));
-/* stable memory */
-let users = StableBTreeMap(Principal, User, 0);
-let challenges = StableBTreeMap(Principal, Challenge, 1);
-
 export default Canister({
-    // * TODO : init code 작성
-    createUser: update([text], Result(Principal, ChallengeError), async (username) => {
-        // identity 관련 로직 마련되면 바꿔야 함. id 중복.
-        const id = getCaller();
-        const account = await _connectAccount(); // createAccount랑 같음
-        if (!account) {
-            return Err({
-                InvalidUser: id,
-            });
-        }
-        const user: typeof User = {
-            id,
-            createdAt: ic.time(),
-            publishingChallengeIds: [],
-            participatingChallengeIds: [],
-            rewardedChallengeIds: [],
-            username,
-        };
-        users.insert(user.id, user);
-        return Ok(user.id);
-    }),
-    readUsers: query([], Vec(User), () => {
-        return users.values();
-    }),
-    readUserById: query([Principal], Opt(User), (id) => {
-        return users.get(id);
-    }),
-    deleteUser: update([Principal], Result(User, ChallengeError), (id) => {
-        const userOpt = users.get(id);
-        if ('None' in userOpt) {
-            return Err({
-                UserDoesNotExist: id,
-            });
-        }
-
-        const user = userOpt.Some;
-        // 유저가 만든 챌린지를 모두 삭제
-        for (const challengeId of user.publishingChallengeIds) {
-            const challengeOpt = challenges.get(challengeId);
-            if ('None' in challengeOpt) {
-                continue;
-            }
-            const challenge = challengeOpt.Some;
-            if (!challenge.ongoing) {
-                return Err({
-                    ChallengeNotFinished: challengeId,
-                });
-            }
-            challenges.remove(challengeId);
-        }
-
-        // 유저가 참여하고 있는 챌린지에서 response 삭제
-        for (const challengeId of user.participatingChallengeIds) {
-            const challengeOpt = challenges.get(challengeId);
-            if ('None' in challengeOpt) {
-                continue;
-            }
-            const challenge = challengeOpt.Some;
-            const updatedResponses = challenge.responses.filter((response) => response.responderId !== id);
-            challenges.insert(challengeId, {
-                ...challenge,
-                responses: updatedResponses,
-            });
-        }
-
-        // 유저 삭제
-        users.remove(id);
-        return Ok(user);
-    }),
-    createChallenge: update(
-        // 시간단위 int...? => 1초 = 10^9
-        [text, text, nat64, int],
-        Result(Principal, ChallengeError),
-        async (title, description, reward, deadline) => {
-            const caller = getCaller();
-            const challengeId = generateId();
-            const createdAt = ic.time();
-            const newChallenge = {
-                id: challengeId,
-                title,
-                description,
-                reward,
-                responses: [],
-                completed: [],
-                ongoing: true,
-                createdAt,
-                creator: caller,
-                deadline,
-            };
-            const success = await _payRewardToken(reward);
-            if (!success) {
-                return Err({
-                    InsufficientToken: caller,
-                });
-            }
-            // challenge 추가
-            challenges.insert(challengeId, newChallenge);
-            const userOpt = users.get(caller);
-            if ('None' in userOpt) {
-                return Err({
-                    UserDoesNotExist: caller,
-                });
-            }
-            const user = userOpt.Some;
-            // user publishing에 new challenge push
-            user.publishingChallengeIds.push(challengeId);
-            users.insert(user.id, user);
-
-            // deadline만큼의 시간이 지나면 expireChallenge를 호출하는 타이머 설정
-            // TODO - test 되는지 꼭 해봐야함.
-            const timerDuration = deadline;
-            const expiredId = challengeId;
-            ic.setTimer(timerDuration, async () => {
-                await _expireChallenge(expiredId);
-            });
-            return Ok(challengeId); // Return challenge ID
-        }
-    ),
-    joinChallenge: update([text, text, Principal], Result(bool, ChallengeError), (title, contents, challengeId) => {
+    initialize: update([text, text, nat64], Result(Principal, TokenError), (name, ticker, totalSupply) => {
         const caller = getCaller();
-        const userOpt = users.get(caller);
-        // caller가 유저가 아니라면 Err
-        if ('None' in userOpt) {
+
+        if (caller !== tokenInfo.owner && !tokenInfo.owner) {
             return Err({
-                UserDoesNotExist: caller,
+                OnlyAdminAccess: caller,
             });
         }
-        const user = userOpt.Some;
-        // 챌린지 없으면 Error
-        const challengeOpt = challenges.get(challengeId);
-        if ('None' in challengeOpt) {
+
+        const creatorAccount: typeof Account = {
+            address: caller,
+            balance: totalSupply,
+            allowances: [],
+        };
+
+        tokenInfo.totalSupply = totalSupply;
+        tokenInfo.owner = caller;
+        tokenInfo.name = name;
+        tokenInfo.ticker = ticker;
+
+        insertAccount(caller, creatorAccount);
+        admins.push(caller);
+
+        return Ok(caller);
+    }),
+
+    connectAccount: update([], bool, () => {
+        const user = getCaller();
+        if (!findAccount(user)) {
+            generateAccount(user);
+        }
+        return true;
+    }),
+
+    allState: query([], Vec(Account), () => {
+        return state.values();
+    }),
+
+    getAdmins: query([], Vec(Principal), () => {
+        return admins;
+    }),
+
+    addAdmins: update([Principal], bool, (address) => {
+        const caller = getCaller();
+
+        if (!isAdmin(caller)) {
+            return false;
+        }
+
+        admins.push(address);
+        return true;
+    }),
+
+    deleteAdmins: update([Principal], bool, (address) => {
+        const caller = getCaller();
+
+        if (tokenInfo.owner != caller) {
+            return false;
+        }
+
+        const indexToDelete = admins.indexOf(address);
+        if (indexToDelete !== -1) {
+            admins.splice(indexToDelete, 1);
+        }
+
+        return true;
+    }),
+
+    name: query([], text, () => {
+        return tokenInfo.name;
+    }),
+
+    ticker: query([], text, () => {
+        return tokenInfo.ticker;
+    }),
+
+    totalSupply: query([], nat64, () => {
+        return tokenInfo.totalSupply;
+    }),
+
+    owner: query([], Principal, () => {
+        return tokenInfo.owner;
+    }),
+
+    balanceOf: query([Principal], Result(nat64, TokenError), (address) => {
+        const accountOpt = getAccountByAddress(address);
+        if ('None' in accountOpt) {
             return Err({
-                ChallengeDoesNotExist: challengeId,
+                AccountDoesNotExist: address,
             });
         }
-        // 챌린지 ongoing이 아니면 Error
-        const challenge = challengeOpt.Some;
-        if (!challenge.ongoing) {
+        return Ok(accountOpt.Some.balance);
+    }),
+
+    // * TODO : CHECK
+    transferReward: update([Principal, nat64], Result(bool, TokenError), (to, amount) => {
+        const adminAccountOpt = getAccountByAddress(tokenInfo.owner);
+        if ('None' in adminAccountOpt) {
             return Err({
-                ChallengeFinished: challengeId,
+                AccountDoesNotExist: tokenInfo.owner,
             });
         }
-        // 챌린지에 참여하지 않고 있다면 push.
-        const isUserParticipated = challenge.responses.some((response) => response.responderId === user.id);
-        if (!isUserParticipated) {
-            const newResponse = {
-                id: ++challenge.responses.length, // 응답 ID 생성.
-                title, // 실제로 사용자의 응답 제목 필요
-                contents, // 실제로 사용자의 응답 내용 필요
-                responderId: user.id,
-                chosen: false,
-            };
-            //response push
-            challenge.responses.push(newResponse);
-            challenges.insert(challengeId, challenge);
-            //해당 user의 participating response 추기
-            user.participatingChallengeIds.push(challengeId);
+        const adminAccount = adminAccountOpt.Some;
+        const toAccountOpt = getAccountByAddress(to);
+        if ('None' in toAccountOpt) {
+            return Err({
+                AccountDoesNotExist: to,
+            });
         } else {
-            return Err({
-                AlreadyParticipated: caller,
-            });
+            const toAccount = toAccountOpt.Some;
+            toAccount.balance += amount;
+            adminAccount.balance -= amount;
+            insertAccount(to, toAccount);
+            insertAccount(tokenInfo.owner, adminAccount);
+            return Ok(true);
         }
-        return Ok(true);
     }),
-    rewardParticipant: update([Principal, int8], Result(bool, ChallengeError), async (challengeId, responseId) => {
-        const user = getCaller();
-        //챌린지 없으면 Err
-        const challengeOpt = challenges.get(challengeId);
-        if ('None' in challengeOpt) {
+
+    // * TODO : CHECK
+    payToAdmin: update([nat64], Result(bool, TokenError), (amount) => {
+        const fromAddress = getCaller();
+        const fromAccountOpt = getAccountByAddress(fromAddress);
+        if ('None' in fromAccountOpt) {
             return Err({
-                ChallengeDoesNotExist: challengeId,
+                AccountDoesNotExist: fromAddress,
             });
         }
-        //챌린지 ongoing이 false면
-        const challenge = challengeOpt.Some;
-        if (!challenge.ongoing) {
+        const fromAccount = fromAccountOpt.Some;
+        const bigIntAmount = BigInt(amount);
+        if (!fromAccount || fromAccount.balance < bigIntAmount) {
+            return Ok(false);
+        }
+        const adminAccountOpt = getAccountByAddress(tokenInfo.owner);
+        if ('None' in adminAccountOpt) {
             return Err({
-                ChallengeFinished: challengeId,
+                AccountDoesNotExist: tokenInfo.owner,
             });
         }
-        //챌린지 소유자가 아니면 Err
-        if (challenge.creator !== user) {
-            return Err({
-                UserNotCreator: user,
-            });
-        }
-        //채택하기
-        const adoptResponse = challenge.responses.find((response) => response.id === responseId);
-        if (!adoptResponse) {
-            return Err({
-                ResponseDoesNotExist: responseId,
-            });
-        }
-        const rewardedUser = adoptResponse.responderId;
-        const transfer = await _transferReward(rewardedUser, challenge.reward); // TODO _transfer 구현 by token canister
-        if (!transfer) {
-            return Err({
-                InvalidUser: rewardedUser,
-            });
-        }
+        const adminAccount = adminAccountOpt.Some;
+        fromAccount.balance -= bigIntAmount;
+        adminAccount.balance += bigIntAmount;
+        insertAccount(fromAddress, fromAccount);
+        insertAccount(tokenInfo.owner, adminAccount);
         return Ok(true);
     }),
 
-    // * TODO : Expire되면, 반환로직 구현
-    //refundReward: update([], ,()),
+    // * TODO : CHECK
+    mint: update([Principal, nat64], Result(bool, TokenError), (to, amount) => {
+        const caller = getCaller();
+        // mint 함수는 admin인 계정만 호출할 수 있습니다.
+        if (caller != tokenInfo.owner) {
+            return Err({
+                OnlyAdminAccess: caller,
+            });
+        }
+        const toAccountOpt = getAccountByAddress(to);
+        if ('None' in toAccountOpt) {
+            const newAccount: typeof Account = {
+                address: to,
+                balance: amount,
+                allowances: [],
+            };
+            insertAccount(to, newAccount);
+        } else {
+            const toAccount = toAccountOpt.Some;
+            toAccount.balance += amount;
+            insertAccount(to, toAccount);
+        }
 
-    // 자기가 참가한 챌린지 목록 반환하는 method
-    getChallengesByParticipant: query([Principal], Vec(Challenge), () => {
-        const user = getCaller();
-        const challengesByParticipant = challenges
-            .values()
-            .filter((challenge) => challenge.responses.some((response) => response.responderId === user));
-        return challengesByParticipant;
-    }),
-    // 자기가 만든 챌린지 목록 반환하는 method
-    getChallengesByCreator: query([], Vec(Challenge), () => {
-        const user = getCaller();
-        const challengesByCreator = challenges.values().filter((challenge) => challenge.creator === user);
-        return challengesByCreator;
-    }),
+        tokenInfo.totalSupply += amount; // 전체 발행된 토큰의 양 추가
 
-    // 전체 챌린지 목록을 reward가 높은 순으로 반환하는 method (20개씩 offset으로 페이징)
-    getChallengesByReward: query([nat64, nat64], Vec(Challenge), (offset, limit) => {
-        const challengesByReward = challenges.values().sort((a, b) => Number(b.reward) - Number(a.reward));
-        return challengesByReward.slice(Number(offset), Number(offset + limit));
-    }),
-
-    // 전체 챌린지 목록을 남은 기간 순으로 반환하는 method (20개씩 offset으로 페이징)
-    getChallengesByDate: query([nat64, nat64], Vec(Challenge), (offset, limit) => {
-        const challengesByDate = challenges.values().sort((a, b) => Number(a.deadline) - Number(b.deadline));
-        return challengesByDate.slice(Number(offset), Number(offset + limit));
+        return Ok(true);
     }),
 
-    // 전체 챌린지 목록을 참여자 수 순으로 반환하는 method (20개씩 offset으로 페이징)
-    getChallengesByParticipants: query([nat64, nat64], Vec(Challenge), (offset, limit) => {
-        const challengesByParticipants = challenges.values().sort((a, b) => b.responses.length - a.responses.length);
-        return challengesByParticipants.slice(Number(offset), Number(offset + limit));
+    // * TODO : CHECK
+    /* burn: update([Principal, nat64], Result(bool, TokenError), (from, amount) => {
+        const caller = getCaller();
+        // burn 함수는 admin인 계정만 호출할 수 있습니다.
+        if (caller !== tokenInfo.owner) {
+            return Err({
+                OnlyAdminAccess: caller,
+            });
+        }
+
+        const fromAccountOpt = getAccountByAddress(from);
+        if ('None' in fromAccountOpt) {
+            return Err({
+                AccountDoesNotExist: from,
+            });
+        }
+        const fromAccount = fromAccountOpt.Some;
+
+        if (fromAccount.balance < amount) {
+            return Err({
+                InsufficientToken: from,
+            });
+        }
+        // from에서 0이라는 주소(없는 ㅈ소)로 amount 보내기
+        let burningAccount;
+        const burningAccountOpt = getAccountByAddress(BURNING_ACCOUNT_ID);
+        if ('None' in burningAccountOpt) {
+            const newBurningAccount: typeof Account = {
+                address: BURNING_ACCOUNT_ID,
+                balance: 0n,
+            };
+            burningAccount = insertAccount(BURNING_ACCOUNT_ID, newBurningAccount);
+        } else {
+            burningAccount = burningAccountOpt.Some;
+        }
+
+        burningAccount.balance += amount;
+        fromAccount.balance -= amount;
+        tokenInfo.totalSupply -= amount; // 전체 토큰에서 양 빼기
+
+        insertAccount(from, fromAccount);
+        insertAccount(BURNING_ACCOUNT_ID, burningAccount);
+        return Ok(true);
+    }),
+*/
+    allowance: query([Principal, Principal], nat64, (owner, spender) => {
+        return _allowance(owner, spender);
+    }),
+
+    allowanceFrom: query([Principal], nat64, (owner) => {
+        const spender = getCaller();
+        const spenderAccount = getAccountByAddress(spender);
+        if ('None in spenderAccount') {
+            return 0n;
+        } else {
+            return _allowance(owner, spender);
+        }
     }),
 });
+
+function isAdmin(address: Principal): boolean {
+    if (admins.indexOf(address) == -1) {
+        return false;
+    }
+    return true;
+}
 
 function getCaller(): Principal {
     const caller = ic.caller();
@@ -360,67 +298,114 @@ function getCaller(): Principal {
     return caller;
 }
 
-// Principal 이용을 위한 임의의 함수
-function generateId(): Principal {
-    const randomBytes = new Array(29).fill(0).map((_) => Math.floor(Math.random() * 256));
-    return Principal.fromUint8Array(new Uint8Array(randomBytes));
+function getAccountByAddress(address: Principal): Opt<typeof Account> {
+    return state.get(address);
 }
 
-//추가
-async function _transferReward(to: Principal, amount: nat64): Promise<Result<boolean, typeof TokenError>> {
-    return await ic.call(TokenCanister.transferReward, {
-        args: [to, amount],
-    });
-}
-//추가
-async function _connectAccount(): Promise<boolean> {
-    return await ic.call(tokenCanister.connectAccount, {
-        args: [],
-    });
-}
-//추가
-async function _payRewardToken(amount: nat64): Promise<Result<boolean, typeof TokenError>> {
-    return await ic.call(TokenCanister.payToAdmin, {
-        args: [amount],
-    });
-}
-
-async function _expireChallenge(challengeId: Principal): Promise<Result<true, typeof ChallengeError>> {
-    const challengeOpt = challenges.get(challengeId);
-    if ('None' in challengeOpt) {
-        return Err({
-            ChallengeDoesNotExist: challengeId,
-        });
+function findAccount(address: Principal): bool {
+    const AccountOpt = getAccountByAddress(address);
+    if ('None' in AccountOpt) {
+        return false;
     }
+    return true;
+}
 
-    const challenge = challengeOpt.Some;
-    challenge.ongoing = false;
+function insertAccount(address: Principal, account: typeof Account): typeof Account {
+    state.insert(address, account);
+    const newAccountOpt = getAccountByAddress(address);
+    if ('None' in newAccountOpt) {
+        throw new Error('Insert failed');
+    }
+    return newAccountOpt.Some;
+}
 
-    // 보상 분배 로직
-    if (challenge.responses.length > 0) {
-        const rewardPerParticipant = Number(challenge.reward) / challenge.responses.length;
-        // 챌린지의 모든 응답을 순회하면서 참여자에게 보상 분배
-        for (const response of challenge.responses) {
-            const participantId = response.responderId;
-            await _transferReward(participantId, BigInt(rewardPerParticipant));
-            // 보상 받은 사용자를 completed 배열에 추가
-            const userOpt = users.get(participantId);
-            if ('None' in userOpt) {
-                return Err({
-                    UserDoesNotExist: participantId,
-                });
-            }
-            const user = userOpt.Some;
-            challenge.completed.push(user);
-            //user의 participating array에 해당 챌린지 제거
-            const index = user.participatingChallengeIds.indexOf(challengeId);
-            if (index !== -1) {
-                user.participatingChallengeIds.splice(index, 1);
-            }
-            users.insert(participantId, user);
+function _allowance(owner: Principal, spender: Principal): nat64 {
+    const ownerAccountOpt = getAccountByAddress(owner);
+    if ('None' in ownerAccountOpt) {
+        throw new Error('Owner account not found');
+    }
+    const ownerAccount = ownerAccountOpt.Some;
+
+    for (let allowance of ownerAccount.allowances) {
+        if (allowance.spender == spender) {
+            return allowance.amount;
         }
-        challenges.insert(challengeId, challenge);
     }
-    // 챌린지 종료 및 보상 분배가 성공적으로 완료된 경우 true 반환
-    return Ok(true);
+    return 0n;
 }
+
+function _transferFrom(from: Principal, to: Principal, amount: nat64): bool {
+    const spender = getCaller();
+    const spenderAccountOpt = getAccountByAddress(spender);
+    if ('None' in spenderAccountOpt) {
+        throw new Error('Spender account not found');
+    }
+    const spenderAccount = spenderAccountOpt.Some;
+
+    const fromAccountOpt = getAccountByAddress(from);
+    if ('None' in fromAccountOpt) {
+        throw new Error('From account not found');
+    }
+    const fromAccount = fromAccountOpt.Some;
+
+    //* TODO: findOrCreate 함수화
+    let toAccount: typeof Account;
+    const toAccountOpt = getAccountByAddress(to);
+    if ('None' in toAccountOpt) {
+        const newToAccount = {
+            address: to,
+            balance: 0n,
+            allowances: [],
+        };
+        toAccount = insertAccount(to, newToAccount);
+    } else {
+        toAccount = toAccountOpt.Some;
+    }
+
+    const allowance = _allowance(from, spender);
+
+    if (allowance === undefined || allowance < amount) {
+        return false;
+    }
+
+    fromAccount.allowances = fromAccount.allowances.map((item) =>
+        item.spender === spender ? { spender: spender, amount: item.amount - amount } : item
+    );
+
+    fromAccount.balance -= amount;
+    toAccount.balance += amount;
+    insertAccount(from, fromAccount);
+    insertAccount(to, toAccount);
+
+    return true;
+}
+
+function generateAccount(address: Principal): bool {
+    const newAccount: typeof Account = {
+        address: address,
+        balance: BigInt(FREE_TOKEN),
+        allowances: [],
+    };
+    // * TODO: 계정 만들어질 때 minting이 아니라서, totalSupply가 늘면 안되는데? -> 난 민팅해서해! 으하하
+    tokenInfo.totalSupply += newAccount.balance;
+    insertAccount(address, newAccount);
+    return true;
+}
+
+// ??
+/*
+function findOrCreateWallet(address: Principal): bool {
+    let tempAccount: typeof Account;
+    const AccountOpt = getAccountByAddress(address);
+    if ('None' in AccountOpt) {
+        const newAccount = {
+            address: Principal,
+            balance: FREE_TOKEN,
+            allowances: [],
+        };
+        tempAccount = insertAccount(address, newAccount);
+    } else {
+        tempAccount = AccountOpt.Some;
+    }
+}
+*/
