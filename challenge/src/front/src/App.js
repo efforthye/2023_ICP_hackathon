@@ -5,6 +5,7 @@ import Home from './Components/Home.jsx';
 import Suggest from './Components/Suggest.jsx';
 import Profile from './Components/Profile.jsx';
 import Footer from './Components/Footer.jsx';
+import React from 'react';
 
 function App() {
     // 일단 icp에 요청을 보내서 처음에 user 정보를 cookie에 가지고 있다가
@@ -14,7 +15,7 @@ function App() {
     // 치트키 : https://dfinityorg.notion.site/ICP-Hackathon-Cheat-Sheet-b2921239266149de81021412f572351c
 
     return (
-        <>
+        <div>
             <Header />
             <Height80Box />
             <AllWrap>
@@ -27,7 +28,7 @@ function App() {
             </AllWrap>
             <Height60Box />
             <Footer />
-        </>
+        </div>
     );
 }
 
