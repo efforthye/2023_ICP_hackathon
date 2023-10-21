@@ -29,9 +29,10 @@ const Profile = () => {
                         <ChallengeBoxWrap>
                             <ChallengeBox className="original">
                                 <ContentWrap>
-                                    <TitleText>이거이거 해주세용</TitleText>
+                                    <TitleText> Although the traditional</TitleText>
                                     <DescText>
-                                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                        Although the traditional "Hello, World!" program illustrates how you can print a
+                                        string that run on the Internet Computer.
                                     </DescText>
                                 </ContentWrap>
                                 <EtcWrap>
@@ -52,13 +53,16 @@ const Profile = () => {
                                 <OverlayText>
                                     <TimeWrap>
                                         <TimeText>챌린지 시작일</TimeText>
-                                        <Time>time</Time>
+                                        <Time>2023. 10. 21.</Time>
                                     </TimeWrap>
                                     <TimeWrap>
                                         <TimeText>챌린지 마감일</TimeText>
-                                        <Time>time</Time>
+                                        <Time>2023. 10. 21.</Time>
                                     </TimeWrap>
-                                    <DetailText>내용 내용 내용...</DetailText>
+                                    <DetailText>
+                                        New projects always include a template main.mo source code file. You can edit
+                                        this file to include your own code to speed up the development cycle.
+                                    </DetailText>
                                 </OverlayText>
                             </OverlayBox>
                         </ChallengeBoxWrap>
@@ -67,9 +71,10 @@ const Profile = () => {
                         <ChallengeBoxWrap>
                             <ChallengeBox className="original">
                                 <ContentWrap>
-                                    <TitleText>이거이거 해주세용</TitleText>
+                                    <TitleText>Motoko fundamentals</TitleText>
                                     <DescText>
-                                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                        then uses the async keyword to indicate that the program returns an asynchronous
+                                        message consisting of a concatenated text string constructed using
                                     </DescText>
                                 </ContentWrap>
                                 <EtcWrap>
@@ -90,13 +95,16 @@ const Profile = () => {
                                 <OverlayText>
                                     <TimeWrap>
                                         <TimeText>챌린지 시작일</TimeText>
-                                        <Time>time</Time>
+                                        <Time>2023. 10. 21.</Time>
                                     </TimeWrap>
                                     <TimeWrap>
                                         <TimeText>챌린지 마감일</TimeText>
-                                        <Time>time</Time>
+                                        <Time>2023. 10. 21.</Time>
                                     </TimeWrap>
-                                    <DetailText>내용 내용 내용...</DetailText>
+                                    <DetailText>
+                                        New projects always include a template main.mo source code file. You can edit
+                                        this file to include your own code to speed up the development cycle.
+                                    </DetailText>
                                 </OverlayText>
                             </OverlayBox>
                         </ChallengeBoxWrap>
@@ -105,9 +113,10 @@ const Profile = () => {
                         <ChallengeBoxWrap>
                             <ChallengeBox className="original">
                                 <ContentWrap>
-                                    <TitleText>이거이거 해주세용</TitleText>
+                                    <TitleText> Although the traditional</TitleText>
                                     <DescText>
-                                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                        Although the traditional "Hello, World!" program illustrates how you can print a
+                                        string that run on the Internet Computer.
                                     </DescText>
                                 </ContentWrap>
                                 <EtcWrap>
@@ -128,51 +137,16 @@ const Profile = () => {
                                 <OverlayText>
                                     <TimeWrap>
                                         <TimeText>챌린지 시작일</TimeText>
-                                        <Time>time</Time>
+                                        <Time>2023. 10. 21.</Time>
                                     </TimeWrap>
                                     <TimeWrap>
                                         <TimeText>챌린지 마감일</TimeText>
-                                        <Time>time</Time>
+                                        <Time>2023. 10. 21.</Time>
                                     </TimeWrap>
-                                    <DetailText>내용 내용 내용...</DetailText>
-                                </OverlayText>
-                            </OverlayBox>
-                        </ChallengeBoxWrap>
-                    </ContentAndOverlayWrap>
-                    <ContentAndOverlayWrap>
-                        <ChallengeBoxWrap>
-                            <ChallengeBox className="original">
-                                <ContentWrap>
-                                    <TitleText>이거이거 해주세용</TitleText>
-                                    <DescText>
-                                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                    </DescText>
-                                </ContentWrap>
-                                <EtcWrap>
-                                    <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                                    <div>
-                                        <TimeWrap>
-                                            <TimeText>creater</TimeText>
-                                            <Time>박혜림</Time>
-                                        </TimeWrap>
-                                        <TimeWrap>
-                                            <TimeText>participants</TimeText>
-                                            <Time>{10}명 참여</Time>
-                                        </TimeWrap>
-                                    </div>
-                                </EtcWrap>
-                            </ChallengeBox>
-                            <OverlayBox className="overlay">
-                                <OverlayText>
-                                    <TimeWrap>
-                                        <TimeText>챌린지 시작일</TimeText>
-                                        <Time>time</Time>
-                                    </TimeWrap>
-                                    <TimeWrap>
-                                        <TimeText>챌린지 마감일</TimeText>
-                                        <Time>time</Time>
-                                    </TimeWrap>
-                                    <DetailText>내용 내용 내용...</DetailText>
+                                    <DetailText>
+                                        New projects always include a template main.mo source code file. You can edit
+                                        this file to include your own code to speed up the development cycle.
+                                    </DetailText>
                                 </OverlayText>
                             </OverlayBox>
                         </ChallengeBoxWrap>
@@ -180,222 +154,342 @@ const Profile = () => {
                 </ChallengeAllWrap>
 
                 <LatestText>참여중인 챌린지</LatestText>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                            <div>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText> Although the traditional</TitleText>
+                                <DescText>
+                                    Although the traditional "Hello, World!" program illustrates how you can print a
+                                    string that run on the Internet Computer.
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
                                 <TimeWrap>
-                                    <TimeText>creater</TimeText>
-                                    <Time>박혜림</Time>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
                                 </TimeWrap>
                                 <TimeWrap>
-                                    <TimeText>participants</TimeText>
-                                    <Time>{10}명 참여</Time>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
                                 </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>
-                            <TimeWrap>
-                                <TimeText>챌린지 시작일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <TimeWrap>
-                                <TimeText>챌린지 마감일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <DetailText>내용 내용 내용...</DetailText>
-                        </OverlayText>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                            <div>
+                                <DetailText>
+                                    New projects always include a template main.mo source code file. You can edit this
+                                    file to include your own code to speed up the development cycle.
+                                </DetailText>
+                            </OverlayText>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText> Although the traditional</TitleText>
+                                <DescText>
+                                    Although the traditional "Hello, World!" program illustrates how you can print a
+                                    string that run on the Internet Computer.
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
                                 <TimeWrap>
-                                    <TimeText>creater</TimeText>
-                                    <Time>박혜림</Time>
-                                </TimeWrap>
-                                <TimeWrap>
-                                    <TimeText>participants</TimeText>
-                                    <Time>{10}명 참여</Time>
-                                </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>
-                            <TimeWrap>
-                                <TimeText>챌린지 시작일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <TimeWrap>
-                                <TimeText>챌린지 마감일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <DetailText>내용 내용 내용...</DetailText>
-                        </OverlayText>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                            <div>
-                                <TimeWrap>
-                                    <TimeText>creater</TimeText>
-                                    <Time>박혜림</Time>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
                                 </TimeWrap>
                                 <TimeWrap>
-                                    <TimeText>participants</TimeText>
-                                    <Time>{10}명 참여</Time>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
                                 </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>
-                            <TimeWrap>
-                                <TimeText>챌린지 시작일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <TimeWrap>
-                                <TimeText>챌린지 마감일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <DetailText>내용 내용 내용...</DetailText>
-                        </OverlayText>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                            <div>
+                                <DetailText>
+                                    New projects always include a template main.mo source code file. You can edit this
+                                    file to include your own code to speed up the development cycle.
+                                </DetailText>
+                            </OverlayText>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText> Although the traditional</TitleText>
+                                <DescText>
+                                    Although the traditional "Hello, World!" program illustrates how you can print a
+                                    string that run on the Internet Computer.
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
                                 <TimeWrap>
-                                    <TimeText>creater</TimeText>
-                                    <Time>박혜림</Time>
-                                </TimeWrap>
-                                <TimeWrap>
-                                    <TimeText>participants</TimeText>
-                                    <Time>{10}명 참여</Time>
-                                </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>
-                            <TimeWrap>
-                                <TimeText>챌린지 시작일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <TimeWrap>
-                                <TimeText>챌린지 마감일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <DetailText>내용 내용 내용...</DetailText>
-                        </OverlayText>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                            <div>
-                                <TimeWrap>
-                                    <TimeText>creater</TimeText>
-                                    <Time>박혜림</Time>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
                                 </TimeWrap>
                                 <TimeWrap>
-                                    <TimeText>participants</TimeText>
-                                    <Time>{10}명 참여</Time>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
                                 </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>
-                            <TimeWrap>
-                                <TimeText>챌린지 시작일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <TimeWrap>
-                                <TimeText>챌린지 마감일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <DetailText>내용 내용 내용...</DetailText>
-                        </OverlayText>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
-                <ChallengeBoxWrap>
-                    <ChallengeBox className="original">
-                        <ContentWrap>
-                            <TitleText>이거이거 해주세용</TitleText>
-                            <DescText>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </DescText>
-                        </ContentWrap>
-                        <EtcWrap>
-                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
-                            <div>
+                                <DetailText>
+                                    New projects always include a template main.mo source code file. You can edit this
+                                    file to include your own code to speed up the development cycle.
+                                </DetailText>
+                            </OverlayText>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText>Motoko fundamentals</TitleText>
+                                <DescText>
+                                    then uses the async keyword to indicate that the program returns an asynchronous
+                                    message consisting of a concatenated text string constructed using
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
                                 <TimeWrap>
-                                    <TimeText>creater</TimeText>
-                                    <Time>박혜림</Time>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
                                 </TimeWrap>
                                 <TimeWrap>
-                                    <TimeText>participants</TimeText>
-                                    <Time>{10}명 참여</Time>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
                                 </TimeWrap>
-                            </div>
-                        </EtcWrap>
-                    </ChallengeBox>
-                    <OverlayBox className="overlay">
-                        <OverlayText>
-                            <TimeWrap>
-                                <TimeText>챌린지 시작일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <TimeWrap>
-                                <TimeText>챌린지 마감일</TimeText>
-                                <Time>time</Time>
-                            </TimeWrap>
-                            <DetailText>내용 내용 내용...</DetailText>
-                        </OverlayText>
-                    </OverlayBox>
-                </ChallengeBoxWrap>
+                                <DetailText>
+                                    New projects always include a template main.mo source code file. You can edit this
+                                    file to include your own code to speed up the development cycle.
+                                </DetailText>
+                            </OverlayText>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText> Although the traditional</TitleText>
+                                <DescText>
+                                    Although the traditional "Hello, World!" program illustrates how you can print a
+                                    string that run on the Internet Computer.
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
+                                <TimeWrap>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
+                                </TimeWrap>
+                                <DetailText>
+                                    New projects always include a template main.mo source code file. You can edit this
+                                    file to include your own code to speed up the development cycle.
+                                </DetailText>
+                            </OverlayText>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText> Although the traditional</TitleText>
+                                <DescText>
+                                    Although the traditional "Hello, World!" program illustrates how you can print a
+                                    string that run on the Internet Computer.
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
+                                <TimeWrap>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
+                                </TimeWrap>
+                                <DetailText>
+                                    New projects always include a template main.mo source code file. You can edit this
+                                    file to include your own code to speed up the development cycle.
+                                </DetailText>
+                            </OverlayText>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText>Motoko fundamentals</TitleText>
+                                <DescText>
+                                    then uses the async keyword to indicate that the program returns an asynchronous
+                                    message consisting of a concatenated text string constructed using
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
+                                <TimeWrap>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
+                                </TimeWrap>
+                                <DetailText>
+                                    New projects always include a template main.mo source code file. You can edit this
+                                    file to include your own code to speed up the development cycle.
+                                </DetailText>
+                            </OverlayText>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText> Although the traditional</TitleText>
+                                <DescText>
+                                    Although the traditional "Hello, World!" program illustrates how you can print a
+                                    string that run on the Internet Computer.
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
+                                <TimeWrap>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 21.</Time>
+                                </TimeWrap>
+                                <DetailText>
+                                    New projects always include a template main.mo source code file. You can edit this
+                                    file to include your own code to speed up the development cycle.
+                                </DetailText>
+                            </OverlayText>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                </ContentAndOverlayWrap>
             </AllWrap>
         </>
     );
@@ -568,7 +662,7 @@ const LatestBtn = styled.div`
 // <div>{challenge.title}</div>
 // <div>{challenge.image}</div>
 // <div>{challenge.summary}</div>
-// <div>{challenge.timestamp}</div>
+// <div>{challenge.2023. 10. 21.stamp}</div>
 // <div>참여하기</div>
 // </ChallengeBox>
 // ))} */}
