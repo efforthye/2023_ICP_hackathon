@@ -2,11 +2,45 @@
     "canisters": {
         "challenge": {
             "type": "custom",
-            "main": "src/challenge.ts",
+            "main": "src/canisters/challenge.ts",
             "candid": "src/dids/challenge.did",
             "build": "npx azle challenge",
             "wasm": ".azle/challenge/challenge.wasm",
-            "gzip": true
+            "gzip": true,
+            "declarations": {
+                "output": "src/front/src/declarations/challenge"
+            }
+        },
+        "token": {
+            "type": "custom",
+            "main": "src/canisters/token.ts",
+            "candid": "src/dids/token.did",
+            "build": "npx azle token",
+            "wasm": ".azle/token/token.wasm",
+            "gzip": true,
+            "declarations": {
+                "output": "src/front/src/declarations/token"
+            }
+        },
+        "front": {
+            "type": "assets",
+            "candid": "src/dids/front.did",
+            "main": "src/front/index.html",
+            "build": "npx azle front",
+            "front": {
+                "entrypoint": "src/front/index.html"
+            },
+            "source": ["src/front/public", "src/front/build", "src/front/dist"]
+        }
+    },
+    "defaults": {
+        "replica": {
+            "subnet_type": "system"
+        }
+    },
+    "networks": {
+        "local": {
+            "bind": "127.0.0.1:4349"
         }
     }
 }
