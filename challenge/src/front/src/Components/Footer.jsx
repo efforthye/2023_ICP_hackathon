@@ -1,12 +1,8 @@
 import React from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { createClient } from '@connect2ic/core';
-import { defaultProviders } from '@connect2ic/core/providers';
-import { ConnectButton, ConnectDialog, Connect2ICProvider } from '@connect2ic/react';
+import { Connect2ICProvider } from '@connect2ic/react';
 import '@connect2ic/core/style.css';
-import { IDL } from '@dfinity/candid';
 import client from '../modules/client.js';
 
 const Footer = () => {

@@ -9,7 +9,7 @@
         "deploy_mainnet": "dfx deploy --network ic challenge",
         "getMessage": "dfx canister call challenge getMessage",
         "setMessage": "dfx canister call challenge setMessage '(\"Hello world!\")'",
-        "deploy": "dfx deploy challenge && dfx deploy token"
+        "deploy": "dfx generate && dfx deploy challenge && dfx deploy token"
     },
     "dependencies": {
         "azle": "0.18.4"
