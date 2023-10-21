@@ -4,7 +4,7 @@ service: () -> {
     allowance: (principal, principal) -> (nat64) query;
     allowanceFrom: (principal) -> (nat64) query;
     balanceOf: (principal) -> (variant {Ok:nat64; Err:variant {InsufficientToken:principal; OnlyAdminAccess:principal; AccountDoesNotExist:principal}}) query;
-    connectAcount: () -> (bool);
+    connectAccount: () -> (bool);
     deleteAdmins: (principal) -> (bool);
     getAdmins: () -> (vec principal) query;
     initialize: (text, text, nat64) -> (variant {Ok:principal; Err:variant {InsufficientToken:principal; OnlyAdminAccess:principal; AccountDoesNotExist:principal}});

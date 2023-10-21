@@ -36,7 +36,7 @@ export const idlFactory = ({ IDL }) => {
         ],
         ['query'],
       ),
-    'connectAcount' : IDL.Func([], [IDL.Bool], []),
+    'connectAccount' : IDL.Func([], [IDL.Bool], []),
     'deleteAdmins' : IDL.Func([IDL.Principal], [IDL.Bool], []),
     'getAdmins' : IDL.Func([], [IDL.Vec(IDL.Principal)], ['query']),
     'initialize' : IDL.Func(

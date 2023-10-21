@@ -24,7 +24,7 @@ export interface _SERVICE {
           { 'AccountDoesNotExist' : Principal }
       }
   >,
-  'connectAcount' : ActorMethod<[], boolean>,
+  'connectAccount' : ActorMethod<[], boolean>,
   'deleteAdmins' : ActorMethod<[Principal], boolean>,
   'getAdmins' : ActorMethod<[], Array<Principal>>,
   'initialize' : ActorMethod<

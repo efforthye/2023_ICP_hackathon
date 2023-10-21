@@ -12,6 +12,7 @@
         "deploy": "dfx generate && dfx deploy challenge && dfx deploy token"
     },
     "dependencies": {
-        "azle": "0.18.4"
+        "azle": "0.18.4",
+        "child_process": "^1.0.2"
     }
 }
