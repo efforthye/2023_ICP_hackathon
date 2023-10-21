@@ -8,7 +8,7 @@
             "wasm": ".azle/challenge/challenge.wasm",
             "gzip": true,
             "declarations": {
-                "output": "src/front/declarations/challenge"
+                "output": "src/front/src/declarations/challenge"
             }
         },
         "token": {
@@ -19,7 +19,7 @@
             "wasm": ".azle/token/token.wasm",
             "gzip": true,
             "declarations": {
-                "output": "src/front/declarations/token"
+                "output": "src/front/src/declarations/token"
             }
         },
         "front": {

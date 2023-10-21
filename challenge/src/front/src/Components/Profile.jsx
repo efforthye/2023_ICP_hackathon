@@ -58,7 +58,7 @@ const Profile = () => {
                                         <TimeText>챌린지 마감일</TimeText>
                                         <Time>time</Time>
                                     </TimeWrap>
-                                    <DetailText>길다란 내용 내용 내용...</DetailText>
+                                    <DetailText>내용 내용 내용...</DetailText>
                                 </OverlayText>
                             </OverlayBox>
                         </ChallengeBoxWrap>
@@ -96,7 +96,7 @@ const Profile = () => {
                                         <TimeText>챌린지 마감일</TimeText>
                                         <Time>time</Time>
                                     </TimeWrap>
-                                    <DetailText>길다란 내용 내용 내용...</DetailText>
+                                    <DetailText>내용 내용 내용...</DetailText>
                                 </OverlayText>
                             </OverlayBox>
                         </ChallengeBoxWrap>
@@ -136,7 +136,7 @@ const Profile = () => {
                                 <TimeText>챌린지 마감일</TimeText>
                                 <Time>time</Time>
                             </TimeWrap>
-                            <DetailText>길다란 내용 내용 내용...</DetailText>
+                            <DetailText>내용 내용 내용...</DetailText>
                         </OverlayText>
                     </OverlayBox>
                 </ChallengeBoxWrap>
