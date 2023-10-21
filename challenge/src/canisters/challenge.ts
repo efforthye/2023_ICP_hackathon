@@ -112,8 +112,12 @@ const tokenCanister = TokenCanister(Principal.fromText('be2us-64aaa-aaaaa-qaabq-
 let users = StableBTreeMap(Principal, User, 0);
 let challenges = StableBTreeMap(Principal, Challenge, 1);
 
+let tokenCanister: typeof TokenCanister;
+const tokenCanisterAddress = TokenCanister(Principal.fromText('be2us-64aaa-aaaaa-qaabq-cai'));
+
 export default Canister({
-    // * TODO : init code 작성
+    // * TODO : init code 작성c
+
     createUser: update([text], Result(Principal, ChallengeError), async (username) => {
         // identity 관련 로직 마련되면 바꿔야 함. id 중복.
         const id = getCaller();
@@ -192,7 +196,7 @@ export default Canister({
     }),
     createChallenge: update(
         // 시간단위 int...? => 1초 = 10^9
-        [text, text, nat64, int],
+        [text, text, nat64, nat64],
         Result(Principal, ChallengeError),
         async (title, description, reward, deadline) => {
             const caller = getCaller();
@@ -230,7 +234,7 @@ export default Canister({
                 // user publishing에 new challenge push
                 user.publishingChallengeIds.push(challengeId);
                 users.insert(user.id, user);
-
+                console.log('\n' + challengeId + '\n');
                 // deadline만큼의 시간이 지나면 expireChallenge를 호출하는 타이머 설정
                 // TODO - test 되는지 꼭 해봐야함.
                 const timerDuration = deadline;
@@ -238,6 +242,7 @@ export default Canister({
                 ic.setTimer(timerDuration, async () => {
                     await _expireChallenge(expiredId);
                 });
+
                 return Ok(challengeId); // Return challenge ID
             } catch (err) {
                 console.log(err);
@@ -247,8 +252,9 @@ export default Canister({
             }
         }
     ),
-    joinChallenge: update([text, text, Principal], Result(bool, ChallengeError), (title, contents, challengeId) => {
+    joinChallenge: update([text, text, text], Result(bool, ChallengeError), (title, contents, challengeid) => {
         const caller = getCaller();
+        const challengeId = Principal.fromText(challengeid);
         const userOpt = users.get(caller);
         // caller가 유저가 아니라면 Err
         if ('None' in userOpt) {
@@ -272,25 +278,18 @@ export default Canister({
             });
         }
         // 챌린지에 참여하지 않고 있다면 push.
-        const isUserParticipated = challenge.responses.some((response) => response.responderId === user.id);
-        if (!isUserParticipated) {
-            const newResponse = {
-                id: ++challenge.responses.length, // 응답 ID 생성.
-                title, // 실제로 사용자의 응답 제목 필요
-                contents, // 실제로 사용자의 응답 내용 필요
-                responderId: user.id,
-                chosen: false,
-            };
-            //response push
-            challenge.responses.push(newResponse);
-            challenges.insert(challengeId, challenge);
-            //해당 user의 participating response 추기
-            user.participatingChallengeIds.push(challengeId);
-        } else {
-            return Err({
-                AlreadyParticipated: caller,
-            });
-        }
+        const newResponse = {
+            id: 1, // 응답 ID 생성.
+            title, // 실제로 사용자의 응답 제목 필요
+            contents, // 실제로 사용자의 응답 내용 필요
+            responderId: caller,
+            chosen: false,
+        };
+        //response push
+        challenge.responses.push(newResponse);
+        challenges.insert(challengeId, challenge);
+        //해당 user의 participating response 추기
+        user.participatingChallengeIds.push(challengeId);
         return Ok(true);
     }),
     rewardParticipant: update([Principal, int8], Result(bool, ChallengeError), async (challengeId, responseId) => {
@@ -345,7 +344,7 @@ export default Canister({
     //refundReward: update([], ,()),
 
     // 자기가 참가한 챌린지 목록 반환하는 method
-    getChallengesByParticipant: query([Principal], Vec(Challenge), () => {
+    getChallengesByParticipant: query([], Vec(Challenge), () => {
         const user = getCaller();
         const challengesByParticipant = challenges
             .values()
@@ -395,19 +394,21 @@ function generateId(): Principal {
 
 //추가
 async function _transferReward(to: Principal, amount: nat64): Promise<Result<boolean, typeof TokenError>> {
-    return await ic.call(TokenCanister.transferReward, {
+    return await ic.call(tokenCanisterAddress.transferReward, {
         args: [to, amount],
     });
 }
 //추가
 async function _connectAccount(): Promise<boolean> {
-    return await ic.call(tokenCanister.connectAccount, {
+
+    return await ic.call(tokenCanisterAddress.connectAcount, {
+
         args: [],
     });
 }
 //추가
 async function _payRewardToken(amount: nat64): Promise<Result<boolean, typeof TokenError>> {
-    return await ic.call(TokenCanister.payToAdmin, {
+    return await ic.call(tokenCanisterAddress.payToAdmin, {
         args: [amount],
     });
 }
@@ -450,6 +451,7 @@ async function _expireChallenge(challengeId: Principal): Promise<Result<true, ty
             challenges.insert(challengeId, challenge);
         }
         // 챌린지 종료 및 보상 분배가 성공적으로 완료된 경우 true 반환
+        console.log('expired!');
         return Ok(true);
     } catch (err) {
         console.log(err);
