@@ -78,7 +78,7 @@ export default Canister({
     connectAcount: update([], bool, () => {
         const user = getCaller();
         if (!findAccount(user)) {
-            generateWallet(user);
+            generateAccount(user);
         }
         return true;
     }),
@@ -293,6 +293,7 @@ function isAdmin(address: Principal): boolean {
 function getCaller(): Principal {
     const caller = ic.caller();
     if (caller === null) {
+        console.log('Caller is null');
         throw new Error('Caller is null');
     }
     return caller;
@@ -314,6 +315,7 @@ function insertAccount(address: Principal, account: typeof Account): typeof Acco
     state.insert(address, account);
     const newAccountOpt = getAccountByAddress(address);
     if ('None' in newAccountOpt) {
+        console.log('Insert failed');
         throw new Error('Insert failed');
     }
     return newAccountOpt.Some;
@@ -322,6 +324,7 @@ function insertAccount(address: Principal, account: typeof Account): typeof Acco
 function _allowance(owner: Principal, spender: Principal): nat64 {
     const ownerAccountOpt = getAccountByAddress(owner);
     if ('None' in ownerAccountOpt) {
+        console.log('Owner account not found');
         throw new Error('Owner account not found');
     }
     const ownerAccount = ownerAccountOpt.Some;
@@ -338,12 +341,14 @@ function _transferFrom(from: Principal, to: Principal, amount: nat64): bool {
     const spender = getCaller();
     const spenderAccountOpt = getAccountByAddress(spender);
     if ('None' in spenderAccountOpt) {
+        console.log('Spender account not found');
         throw new Error('Spender account not found');
     }
     const spenderAccount = spenderAccountOpt.Some;
 
     const fromAccountOpt = getAccountByAddress(from);
     if ('None' in fromAccountOpt) {
+        console.log('From account not found');
         throw new Error('From account not found');
     }
     const fromAccount = fromAccountOpt.Some;
@@ -380,15 +385,15 @@ function _transferFrom(from: Principal, to: Principal, amount: nat64): bool {
     return true;
 }
 
-function generateWallet(address: Principal): bool {
-    const newWallet: typeof Account = {
+function generateAccount(address: Principal): bool {
+    const newAccount: typeof Account = {
         address: address,
         balance: BigInt(FREE_TOKEN),
         allowances: [],
     };
     // * TODO: 계정 만들어질 때 minting이 아니라서, totalSupply가 늘면 안되는데? -> 난 민팅해서해! 으하하
-    tokenInfo.totalSupply += newWallet.balance;
-    insertAccount(address, newWallet);
+    tokenInfo.totalSupply += newAccount.balance;
+    insertAccount(address, newAccount);
     return true;
 }
 
