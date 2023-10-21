@@ -90,7 +90,7 @@ const SuggestModal = (props) => {
 export default React.memo(SuggestModal);
 
 const AllWrap = styled.div`
-    background-color: #0000004e;
+    background-color: #0000002d;
     width: 100vw;
     height: 100%;
     position: absolute;
