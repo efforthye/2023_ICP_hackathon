@@ -28,7 +28,7 @@ const SuggestModal = (props) => {
                     </ExistWrap>
                     <div>
                         <TextTitle></TextTitle>
-                        <Description>선택한 챌린지에 대한 설명 출력 설명설명 ㅇㅅㅇ;;</Description>
+                        <Description>{props.text || '참여를 시작합니다.'}</Description>
                     </div>
                     <ContentsWrap>
                         <InputWrap>
@@ -90,7 +90,7 @@ const SuggestModal = (props) => {
 export default React.memo(SuggestModal);
 
 const AllWrap = styled.div`
-    background-color: #0000004e;
+    background-color: #0000002d;
     width: 100vw;
     height: 100%;
     position: absolute;

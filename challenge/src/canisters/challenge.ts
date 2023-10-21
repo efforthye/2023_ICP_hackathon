@@ -107,19 +107,23 @@ const TokenError = Variant({
     InsufficientToken: Principal,
 });
 
+const tokenCanister = TokenCanister(Principal.fromText('be2us-64aaa-aaaaa-qaabq-cai'));
 /* stable memory */
 let users = StableBTreeMap(Principal, User, 0);
 let challenges = StableBTreeMap(Principal, Challenge, 1);
+
 let tokenCanister: typeof TokenCanister;
 const tokenCanisterAddress = TokenCanister(Principal.fromText('be2us-64aaa-aaaaa-qaabq-cai'));
 
 export default Canister({
     // * TODO : init code 작성c
+
     createUser: update([text], Result(Principal, ChallengeError), async (username) => {
         // identity 관련 로직 마련되면 바꿔야 함. id 중복.
         const id = getCaller();
         try {
             const account = await _connectAccount(); // createAccount랑 같음
+            console.log({ account });
             if (!account) {
                 return Err({
                     InvalidUser: id,
@@ -210,6 +214,7 @@ export default Canister({
                 creator: caller,
                 deadline,
             };
+
             try {
                 const success = await _payRewardToken(reward);
                 if (!success) {
@@ -395,7 +400,9 @@ async function _transferReward(to: Principal, amount: nat64): Promise<Result<boo
 }
 //추가
 async function _connectAccount(): Promise<boolean> {
+
     return await ic.call(tokenCanisterAddress.connectAcount, {
+
         args: [],
     });
 }

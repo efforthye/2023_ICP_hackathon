@@ -1,14 +1,43 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ConnectButton, ConnectDialog, Connect2ICProvider } from '@connect2ic/react';
+import { Connect2ICProvider } from '@connect2ic/react';
 import client from '../modules/client.js';
 import SuggestModal from './modal/SuggestModal.jsx';
-// console.log({ client });
 
 import { AuthClient } from '@dfinity/auth-client';
 
+import {
+    canisterId as tokenCanisterId,
+    challenge as tokenChallenge,
+    createActor as createTokenActor,
+    idlFactory as tokenIdlFactory,
+} from '../declarations/token';
+import {
+    canisterId as challengeCanisterId,
+    challenge as challengeChallenge,
+    createActor as createChallengeActor,
+    idlFactory as challengeIdlFactory,
+} from '../declarations/challenge';
+
+import { ActorSubclass, HttpAgentOptions, HttpAgent, Actor, ActorConfig, Agent } from '@dfinity/agent';
+
+//
+// import { execSync } from 'child_process';
+
+//
+// 호스트 url 지정
+const host = 'http://localhost:4943';
+
+// principal 생성
+const authClient = await AuthClient.create();
+const principal = await authClient.getIdentity().getPrincipal();
+
+// HTTP 에이전트 생성
+const agent = new HttpAgent({ host, identity: principal });
+
+// 쿠키에서 principal 가져옴
 function getPrincipal() {
     const name = 'principal';
     var cookieArray = document.cookie.split('; ');
@@ -22,10 +51,15 @@ function getPrincipal() {
     return '';
 }
 
+// 캐니스터 인스턴스 생성
+const TokenCanister = createTokenActor({ canisterId: tokenCanisterId, agent: agent });
+const ChallengeCanister = createChallengeActor({ canisterId: challengeCanisterId, agent: agent });
+
 const Header = () => {
     const [login, setLogin] = useState(false);
     const [modal, setModal] = useState(false);
     const [principal, setPrincipal] = useState();
+    console.log({ TokenCanister, ChallengeCanister });
 
     return (
         <Connect2ICProvider client={client}>
@@ -35,7 +69,7 @@ const Header = () => {
                     <LogoWrap>
                         <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
                             <LogoImg alt="" src="images/difinity.png" />
-                            <div>DeFi CHALLENGE</div>
+                            <div>ICP CHALLENGE</div>
                         </Link>
                     </LogoWrap>{' '}
                     <RightWrap>
@@ -98,6 +132,31 @@ const Header = () => {
                                         const cookie = await getPrincipal();
                                         console.log({ cookie });
                                         setPrincipal(cookie);
+
+                                        // 실제 요청 보냄
+                                        console.log({ ChallengeCanister });
+                                        await ChallengeCanister.createUser(['유저'])
+                                            .then((result) => {
+                                                // 요청이 성공하면 이 부분에서 결과를 처리합니다.
+                                                console.log('connectAccount 성공:', result);
+                                            })
+                                            .catch((error) => {
+                                                // 요청이 실패하면 이 부분에서 에러를 처리합니다.
+                                                console.error('connectAccount 실패:', error);
+                                            });
+
+                                        // const dfx = async () => {
+                                        //     const result = execSync(
+                                        //         `dfx canister call challenge createUser '("나에 이름 ㅇㅅㅇ")'`
+                                        //     )
+                                        //         .toString()
+                                        //         .trim();
+
+                                        //     return {
+                                        //         Ok: result === '(service "aaaaa-aa")',
+                                        //     };
+                                        // };
+                                        // console.log({ dfx });
 
                                         setLogin(cookie ? true : false);
                                     }}

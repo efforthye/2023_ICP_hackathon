@@ -75,7 +75,7 @@ export default Canister({
         return Ok(caller);
     }),
 
-    connectAcount: update([], bool, () => {
+    connectAccount: update([], bool, () => {
         const user = getCaller();
         if (!findAccount(user)) {
             generateAccount(user);

@@ -24,9 +24,60 @@ const Home = () => {
                     <ChallengeBoxWrap>
                         <ChallengeBox className="original">
                             <ContentWrap>
-                                <TitleText>이거이거 해주세용</TitleText>
+                                <TitleText>요즘 영화 관람 얼마인가요</TitleText>
+                                <DescText>청소년 주중에 보는건 얼마정도 하나요</DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>2vxsx-fae</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{16}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
+                                <TimeWrap>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 20.</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 22.</Time>
+                                </TimeWrap>
+                                <DetailText>청소년 주중에 보는건 얼마정도 하나요</DetailText>
+                            </OverlayText>
+                            <EightBtn
+                                onClick={() => {
+                                    // 참여하기 모달 띄우기
+                                    setModal(true);
+                                }}
+                            >
+                                <div>참여하기</div>
+                            </EightBtn>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                    {modal ? (
+                        <ParticipateModal modalSet={setModal} text={'청소년 주중에 보는건 얼마정도 하나요'} />
+                    ) : (
+                        <></>
+                    )}
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText>카메라 추천</TitleText>
                                 <DescText>
-                                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                    핸드폰으로만 사진 촬영하다가 카메라를 사볼까 하는데 입문용으로 추천해주세요! 가격은
+                                    50만원 이하 정도, 사이즈는 휴대하기 편한 작은 사이즈였으면 좋겠어요! 주로 콘서트
+                                    사진이나 여행갔을때 풍경 사진, 인물 사진 찍을 예정입니당
                                 </DescText>
                             </ContentWrap>
                             <EtcWrap>
@@ -47,19 +98,72 @@ const Home = () => {
                             <OverlayText>
                                 <TimeWrap>
                                     <TimeText>챌린지 시작일</TimeText>
-                                    <Time>time</Time>
+                                    <Time>2023. 10. 20.</Time>
                                 </TimeWrap>
                                 <TimeWrap>
                                     <TimeText>챌린지 마감일</TimeText>
-                                    <Time>time</Time>
+                                    <Time>2023. 10. 22.</Time>
                                 </TimeWrap>
-                                <DetailText>길다란 내용 내용 내용...</DetailText>
+                                <DetailText>
+                                    핸드폰으로만 사진 촬영하다가 카메라를 사볼까 하는데 입문용으로 추천해주세요! 가격은
+                                    50만원 이하 정도, 사이즈는 휴대하기 편한 작은 사이즈였으면 좋겠어요! 주로 콘서트
+                                    사진이나 여행갔을때 풍경 사진, 인물 사진 찍을 예정입니당
+                                </DetailText>
                             </OverlayText>
                             <EightBtn
                                 onClick={() => {
                                     // 참여하기 모달 띄우기
                                     setModal(true);
-                                    alert('참여하기');
+                                }}
+                            >
+                                <div>참여하기</div>
+                            </EightBtn>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText>서울 버스 하차시 미태그</TitleText>
+                                <DescText>
+                                    제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                    되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그
+                                    해버린 카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
+                                <TimeWrap>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 20.</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 22.</Time>
+                                </TimeWrap>
+                                <DetailText>
+                                    제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                    되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그
+                                    해버린 카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                                </DetailText>
+                            </OverlayText>
+                            <EightBtn
+                                onClick={() => {
+                                    // 참여하기 모달 띄우기
+                                    setModal(true);
                                 }}
                             >
                                 <div>참여하기</div>
@@ -72,9 +176,60 @@ const Home = () => {
                     <ChallengeBoxWrap>
                         <ChallengeBox className="original">
                             <ContentWrap>
-                                <TitleText>이거이거 해주세용</TitleText>
+                                <TitleText>요즘 영화 관람 얼마인가요</TitleText>
+                                <DescText>청소년 주중에 보는건 얼마정도 하나요</DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>2vxsx-fae</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{16}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
+                                <TimeWrap>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 20.</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 22.</Time>
+                                </TimeWrap>
+                                <DetailText>청소년 주중에 보는건 얼마정도 하나요</DetailText>
+                            </OverlayText>
+                            <EightBtn
+                                onClick={() => {
+                                    // 참여하기 모달 띄우기
+                                    setModal(true);
+                                }}
+                            >
+                                <div>참여하기</div>
+                            </EightBtn>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                    {modal ? (
+                        <ParticipateModal modalSet={setModal} text={'청소년 주중에 보는건 얼마정도 하나요'} />
+                    ) : (
+                        <></>
+                    )}
+                </ContentAndOverlayWrap>
+                <ContentAndOverlayWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText>카메라 추천</TitleText>
                                 <DescText>
-                                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                    핸드폰으로만 사진 촬영하다가 카메라를 사볼까 하는데 입문용으로 추천해주세요! 가격은
+                                    50만원 이하 정도, 사이즈는 휴대하기 편한 작은 사이즈였으면 좋겠어요! 주로 콘서트
+                                    사진이나 여행갔을때 풍경 사진, 인물 사진 찍을 예정입니당
                                 </DescText>
                             </ContentWrap>
                             <EtcWrap>
@@ -95,19 +250,72 @@ const Home = () => {
                             <OverlayText>
                                 <TimeWrap>
                                     <TimeText>챌린지 시작일</TimeText>
-                                    <Time>time</Time>
+                                    <Time>2023. 10. 20.</Time>
                                 </TimeWrap>
                                 <TimeWrap>
                                     <TimeText>챌린지 마감일</TimeText>
-                                    <Time>time</Time>
+                                    <Time>2023. 10. 22.</Time>
                                 </TimeWrap>
-                                <DetailText>길다란 내용 내용 내용...</DetailText>
+                                <DetailText>
+                                    핸드폰으로만 사진 촬영하다가 카메라를 사볼까 하는데 입문용으로 추천해주세요! 가격은
+                                    50만원 이하 정도, 사이즈는 휴대하기 편한 작은 사이즈였으면 좋겠어요! 주로 콘서트
+                                    사진이나 여행갔을때 풍경 사진, 인물 사진 찍을 예정입니당
+                                </DetailText>
                             </OverlayText>
                             <EightBtn
                                 onClick={() => {
                                     // 참여하기 모달 띄우기
                                     setModal(true);
-                                    alert('참여하기');
+                                }}
+                            >
+                                <div>참여하기</div>
+                            </EightBtn>
+                        </OverlayBox>
+                    </ChallengeBoxWrap>
+                    <ChallengeBoxWrap>
+                        <ChallengeBox className="original">
+                            <ContentWrap>
+                                <TitleText>서울 버스 하차시 미태그</TitleText>
+                                <DescText>
+                                    제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                    되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그
+                                    해버린 카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                                </DescText>
+                            </ContentWrap>
+                            <EtcWrap>
+                                <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                <div>
+                                    <TimeWrap>
+                                        <TimeText>creater</TimeText>
+                                        <Time>박혜림</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>participants</TimeText>
+                                        <Time>{10}명 참여</Time>
+                                    </TimeWrap>
+                                </div>
+                            </EtcWrap>
+                        </ChallengeBox>
+                        <OverlayBox className="overlay">
+                            <OverlayText>
+                                <TimeWrap>
+                                    <TimeText>챌린지 시작일</TimeText>
+                                    <Time>2023. 10. 20.</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>챌린지 마감일</TimeText>
+                                    <Time>2023. 10. 22.</Time>
+                                </TimeWrap>
+                                <DetailText>
+                                    제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                    되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그
+                                    해버린 카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                                </DetailText>
+                            </OverlayText>
+                            <EightBtn
+                                onClick={() => {
+                                    // 참여하기 모달 띄우기
+                                    setModal(true);
                                 }}
                             >
                                 <div>참여하기</div>
@@ -116,15 +324,117 @@ const Home = () => {
                     </ChallengeBoxWrap>
                     {modal ? <ParticipateModal modalSet={setModal} /> : <></>}
                 </ContentAndOverlayWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>서울 버스 하차시 미태그</TitleText>
+                            <DescText>
+                                제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                                카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>2023. 10. 20.</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>2023. 10. 22.</Time>
+                            </TimeWrap>
+                            <DetailText>
+                                제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                                카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                            </DetailText>
+                        </OverlayText>
+                        <EightBtn
+                            onClick={() => {
+                                // 참여하기 모달 띄우기
+                                setModal(true);
+                            }}
+                        >
+                            <div>참여하기</div>
+                        </EightBtn>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>서울 버스 하차시 미태그</TitleText>
+                            <DescText>
+                                제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                                카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>2023. 10. 20.</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>2023. 10. 22.</Time>
+                            </TimeWrap>
+                            <DetailText>
+                                제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                                카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                            </DetailText>
+                        </OverlayText>
+                        <EightBtn
+                            onClick={() => {
+                                // 참여하기 모달 띄우기
+                                setModal(true);
+                            }}
+                        >
+                            <div>참여하기</div>
+                        </EightBtn>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
             </ChallengeAllWrap>
 
             <LatestText>Latest Challenge</LatestText>
             <ChallengeBoxWrap>
                 <ChallengeBox className="original">
                     <ContentWrap>
-                        <TitleText>이거이거 해주세용</TitleText>
+                        <TitleText>서울 버스 하차시 미태그</TitleText>
                         <DescText>
-                            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
                         </DescText>
                     </ContentWrap>
                     <EtcWrap>
@@ -145,18 +455,465 @@ const Home = () => {
                     <OverlayText>
                         <TimeWrap>
                             <TimeText>챌린지 시작일</TimeText>
-                            <Time>time</Time>
+                            <Time>2023. 10. 20.</Time>
                         </TimeWrap>
                         <TimeWrap>
                             <TimeText>챌린지 마감일</TimeText>
-                            <Time>time</Time>
+                            <Time>2023. 10. 22.</Time>
                         </TimeWrap>
-                        <DetailText>길다란 내용 내용 내용...</DetailText>
+                        <DetailText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DetailText>
                     </OverlayText>
                     <EightBtn
                         onClick={() => {
                             // 참여하기 모달 띄우기
-                            alert('참여하기');
+                            setModal(true);
+                        }}
+                    >
+                        <div>참여하기</div>
+                    </EightBtn>
+                </OverlayBox>
+            </ChallengeBoxWrap>
+            <ContentAndOverlayWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>요즘 영화 관람 얼마인가요</TitleText>
+                            <DescText>청소년 주중에 보는건 얼마정도 하나요</DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>2vxsx-fae</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{16}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>2023. 10. 20.</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>2023. 10. 22.</Time>
+                            </TimeWrap>
+                            <DetailText>청소년 주중에 보는건 얼마정도 하나요</DetailText>
+                        </OverlayText>
+                        <EightBtn
+                            onClick={() => {
+                                // 참여하기 모달 띄우기
+                                setModal(true);
+                            }}
+                        >
+                            <div>참여하기</div>
+                        </EightBtn>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                {modal ? <ParticipateModal modalSet={setModal} text={'청소년 주중에 보는건 얼마정도 하나요'} /> : <></>}
+            </ContentAndOverlayWrap>
+            <ContentAndOverlayWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>카메라 추천</TitleText>
+                            <DescText>
+                                핸드폰으로만 사진 촬영하다가 카메라를 사볼까 하는데 입문용으로 추천해주세요! 가격은
+                                50만원 이하 정도, 사이즈는 휴대하기 편한 작은 사이즈였으면 좋겠어요! 주로 콘서트
+                                사진이나 여행갔을때 풍경 사진, 인물 사진 찍을 예정입니당
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>2023. 10. 20.</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>2023. 10. 22.</Time>
+                            </TimeWrap>
+                            <DetailText>
+                                핸드폰으로만 사진 촬영하다가 카메라를 사볼까 하는데 입문용으로 추천해주세요! 가격은
+                                50만원 이하 정도, 사이즈는 휴대하기 편한 작은 사이즈였으면 좋겠어요! 주로 콘서트
+                                사진이나 여행갔을때 풍경 사진, 인물 사진 찍을 예정입니당
+                            </DetailText>
+                        </OverlayText>
+                        <EightBtn
+                            onClick={() => {
+                                // 참여하기 모달 띄우기
+                                setModal(true);
+                            }}
+                        >
+                            <div>참여하기</div>
+                        </EightBtn>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>서울 버스 하차시 미태그</TitleText>
+                            <DescText>
+                                제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                                카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>2023. 10. 20.</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>2023. 10. 22.</Time>
+                            </TimeWrap>
+                            <DetailText>
+                                제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                                되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                                카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                            </DetailText>
+                        </OverlayText>
+                        <EightBtn
+                            onClick={() => {
+                                // 참여하기 모달 띄우기
+                                setModal(true);
+                            }}
+                        >
+                            <div>참여하기</div>
+                        </EightBtn>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                {modal ? <ParticipateModal modalSet={setModal} /> : <></>}
+            </ContentAndOverlayWrap>
+            <ContentAndOverlayWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>요즘 영화 관람 얼마인가요</TitleText>
+                            <DescText>청소년 주중에 보는건 얼마정도 하나요</DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>2vxsx-fae</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{16}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>2023. 10. 20.</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>2023. 10. 22.</Time>
+                            </TimeWrap>
+                            <DetailText>청소년 주중에 보는건 얼마정도 하나요</DetailText>
+                        </OverlayText>
+                        <EightBtn
+                            onClick={() => {
+                                // 참여하기 모달 띄우기
+                                setModal(true);
+                            }}
+                        >
+                            <div>참여하기</div>
+                        </EightBtn>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                {modal ? <ParticipateModal modalSet={setModal} text={'청소년 주중에 보는건 얼마정도 하나요'} /> : <></>}
+            </ContentAndOverlayWrap>
+            <ChallengeBoxWrap>
+                <ChallengeBox className="original">
+                    <ContentWrap>
+                        <TitleText>서울 버스 하차시 미태그</TitleText>
+                        <DescText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DescText>
+                    </ContentWrap>
+                    <EtcWrap>
+                        <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                        <div>
+                            <TimeWrap>
+                                <TimeText>creater</TimeText>
+                                <Time>박혜림</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>participants</TimeText>
+                                <Time>{10}명 참여</Time>
+                            </TimeWrap>
+                        </div>
+                    </EtcWrap>
+                </ChallengeBox>
+                <OverlayBox className="overlay">
+                    <OverlayText>
+                        <TimeWrap>
+                            <TimeText>챌린지 시작일</TimeText>
+                            <Time>2023. 10. 20.</Time>
+                        </TimeWrap>
+                        <TimeWrap>
+                            <TimeText>챌린지 마감일</TimeText>
+                            <Time>2023. 10. 22.</Time>
+                        </TimeWrap>
+                        <DetailText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DetailText>
+                    </OverlayText>
+                    <EightBtn
+                        onClick={() => {
+                            // 참여하기 모달 띄우기
+                            setModal(true);
+                        }}
+                    >
+                        <div>참여하기</div>
+                    </EightBtn>
+                </OverlayBox>
+            </ChallengeBoxWrap>
+            <ChallengeBoxWrap>
+                <ChallengeBox className="original">
+                    <ContentWrap>
+                        <TitleText>서울 버스 하차시 미태그</TitleText>
+                        <DescText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DescText>
+                    </ContentWrap>
+                    <EtcWrap>
+                        <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                        <div>
+                            <TimeWrap>
+                                <TimeText>creater</TimeText>
+                                <Time>박혜림</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>participants</TimeText>
+                                <Time>{10}명 참여</Time>
+                            </TimeWrap>
+                        </div>
+                    </EtcWrap>
+                </ChallengeBox>
+                <OverlayBox className="overlay">
+                    <OverlayText>
+                        <TimeWrap>
+                            <TimeText>챌린지 시작일</TimeText>
+                            <Time>2023. 10. 20.</Time>
+                        </TimeWrap>
+                        <TimeWrap>
+                            <TimeText>챌린지 마감일</TimeText>
+                            <Time>2023. 10. 22.</Time>
+                        </TimeWrap>
+                        <DetailText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DetailText>
+                    </OverlayText>
+                    <EightBtn
+                        onClick={() => {
+                            // 참여하기 모달 띄우기
+                            setModal(true);
+                        }}
+                    >
+                        <div>참여하기</div>
+                    </EightBtn>
+                </OverlayBox>
+            </ChallengeBoxWrap>
+            <ChallengeBoxWrap>
+                <ChallengeBox className="original">
+                    <ContentWrap>
+                        <TitleText>서울 버스 하차시 미태그</TitleText>
+                        <DescText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DescText>
+                    </ContentWrap>
+                    <EtcWrap>
+                        <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                        <div>
+                            <TimeWrap>
+                                <TimeText>creater</TimeText>
+                                <Time>박혜림</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>participants</TimeText>
+                                <Time>{10}명 참여</Time>
+                            </TimeWrap>
+                        </div>
+                    </EtcWrap>
+                </ChallengeBox>
+                <OverlayBox className="overlay">
+                    <OverlayText>
+                        <TimeWrap>
+                            <TimeText>챌린지 시작일</TimeText>
+                            <Time>2023. 10. 20.</Time>
+                        </TimeWrap>
+                        <TimeWrap>
+                            <TimeText>챌린지 마감일</TimeText>
+                            <Time>2023. 10. 22.</Time>
+                        </TimeWrap>
+                        <DetailText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DetailText>
+                    </OverlayText>
+                    <EightBtn
+                        onClick={() => {
+                            // 참여하기 모달 띄우기
+                            setModal(true);
+                        }}
+                    >
+                        <div>참여하기</div>
+                    </EightBtn>
+                </OverlayBox>
+            </ChallengeBoxWrap>
+            <ChallengeBoxWrap>
+                <ChallengeBox className="original">
+                    <ContentWrap>
+                        <TitleText>서울 버스 하차시 미태그</TitleText>
+                        <DescText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DescText>
+                    </ContentWrap>
+                    <EtcWrap>
+                        <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                        <div>
+                            <TimeWrap>
+                                <TimeText>creater</TimeText>
+                                <Time>박혜림</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>participants</TimeText>
+                                <Time>{10}명 참여</Time>
+                            </TimeWrap>
+                        </div>
+                    </EtcWrap>
+                </ChallengeBox>
+                <OverlayBox className="overlay">
+                    <OverlayText>
+                        <TimeWrap>
+                            <TimeText>챌린지 시작일</TimeText>
+                            <Time>2023. 10. 20.</Time>
+                        </TimeWrap>
+                        <TimeWrap>
+                            <TimeText>챌린지 마감일</TimeText>
+                            <Time>2023. 10. 22.</Time>
+                        </TimeWrap>
+                        <DetailText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DetailText>
+                    </OverlayText>
+                    <EightBtn
+                        onClick={() => {
+                            // 참여하기 모달 띄우기
+                            setModal(true);
+                        }}
+                    >
+                        <div>참여하기</div>
+                    </EightBtn>
+                </OverlayBox>
+            </ChallengeBoxWrap>
+            <ChallengeBoxWrap>
+                <ChallengeBox className="original">
+                    <ContentWrap>
+                        <TitleText>서울 버스 하차시 미태그</TitleText>
+                        <DescText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DescText>
+                    </ContentWrap>
+                    <EtcWrap>
+                        <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                        <div>
+                            <TimeWrap>
+                                <TimeText>creater</TimeText>
+                                <Time>박혜림</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>participants</TimeText>
+                                <Time>{10}명 참여</Time>
+                            </TimeWrap>
+                        </div>
+                    </EtcWrap>
+                </ChallengeBox>
+                <OverlayBox className="overlay">
+                    <OverlayText>
+                        <TimeWrap>
+                            <TimeText>챌린지 시작일</TimeText>
+                            <Time>2023. 10. 20.</Time>
+                        </TimeWrap>
+                        <TimeWrap>
+                            <TimeText>챌린지 마감일</TimeText>
+                            <Time>2023. 10. 22.</Time>
+                        </TimeWrap>
+                        <DetailText>
+                            제가 서울경기 빨간광역버스를 탔다가 하차 할 때 다른 카드를 찍어버려서 또 승차가
+                            되어버럈어요퓨ㅠㅠ 원래 찍었던 카드는 다시 하차태그를 하긴했는데 내릴 때 승차태그 해버린
+                            카드 요금은 얼마 나올까용? ㅠㅠㅠㅠ
+                        </DetailText>
+                    </OverlayText>
+                    <EightBtn
+                        onClick={() => {
+                            // 참여하기 모달 띄우기
+                            setModal(true);
                         }}
                     >
                         <div>참여하기</div>

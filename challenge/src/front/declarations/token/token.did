@@ -1,0 +1,18 @@
+service: () -> {
+    addAdmins: (principal) -> (bool);
+    allState: () -> (vec record {balance:nat64; address:principal; allowances:vec record {amount:nat64; spender:principal}}) query;
+    allowance: (principal, principal) -> (nat64) query;
+    allowanceFrom: (principal) -> (nat64) query;
+    balanceOf: (principal) -> (variant {Ok:nat64; Err:variant {InsufficientToken:principal; OnlyAdminAccess:principal; AccountDoesNotExist:principal}}) query;
+    connectAcount: () -> (bool);
+    deleteAdmins: (principal) -> (bool);
+    getAdmins: () -> (vec principal) query;
+    initialize: (text, text, nat64) -> (variant {Ok:principal; Err:variant {InsufficientToken:principal; OnlyAdminAccess:principal; AccountDoesNotExist:principal}});
+    mint: (principal, nat64) -> (variant {Ok:bool; Err:variant {InsufficientToken:principal; OnlyAdminAccess:principal; AccountDoesNotExist:principal}});
+    name: () -> (text) query;
+    owner: () -> (principal) query;
+    payToAdmin: (nat64) -> (variant {Ok:bool; Err:variant {InsufficientToken:principal; OnlyAdminAccess:principal; AccountDoesNotExist:principal}});
+    ticker: () -> (text) query;
+    totalSupply: () -> (nat64) query;
+    transferReward: (principal, nat64) -> (variant {Ok:bool; Err:variant {InsufficientToken:principal; OnlyAdminAccess:principal; AccountDoesNotExist:principal}});
+}
