@@ -23,6 +23,10 @@ import {
 
 import { ActorSubclass, HttpAgentOptions, HttpAgent, Actor, ActorConfig, Agent } from '@dfinity/agent';
 
+//
+// import { execSync } from 'child_process';
+
+//
 // 호스트 url 지정
 const host = 'http://localhost:4943';
 
@@ -65,7 +69,7 @@ const Header = () => {
                     <LogoWrap>
                         <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
                             <LogoImg alt="" src="images/difinity.png" />
-                            <div>DeFi CHALLENGE</div>
+                            <div>ICP CHALLENGE</div>
                         </Link>
                     </LogoWrap>{' '}
                     <RightWrap>
@@ -130,8 +134,8 @@ const Header = () => {
                                         setPrincipal(cookie);
 
                                         // 실제 요청 보냄
-                                        console.log({ TokenCanister });
-                                        await TokenCanister.allState()
+                                        console.log({ ChallengeCanister });
+                                        await ChallengeCanister.createUser(['유저'])
                                             .then((result) => {
                                                 // 요청이 성공하면 이 부분에서 결과를 처리합니다.
                                                 console.log('connectAccount 성공:', result);
@@ -140,6 +144,19 @@ const Header = () => {
                                                 // 요청이 실패하면 이 부분에서 에러를 처리합니다.
                                                 console.error('connectAccount 실패:', error);
                                             });
+
+                                        // const dfx = async () => {
+                                        //     const result = execSync(
+                                        //         `dfx canister call challenge createUser '("나에 이름 ㅇㅅㅇ")'`
+                                        //     )
+                                        //         .toString()
+                                        //         .trim();
+
+                                        //     return {
+                                        //         Ok: result === '(service "aaaaa-aa")',
+                                        //     };
+                                        // };
+                                        // console.log({ dfx });
 
                                         setLogin(cookie ? true : false);
                                     }}

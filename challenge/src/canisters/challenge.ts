@@ -111,8 +111,6 @@ const tokenCanister = TokenCanister(Principal.fromText('be2us-64aaa-aaaaa-qaabq-
 /* stable memory */
 let users = StableBTreeMap(Principal, User, 0);
 let challenges = StableBTreeMap(Principal, Challenge, 1);
-let tokenCanister: typeof TokenCanister;
-const tokenCanisterAddress = TokenCanister(Principal.fromText('bw4dl-smaaa-aaaaa-qaacq-cai'));
 
 export default Canister({
     // * TODO : init code 작성
@@ -121,6 +119,7 @@ export default Canister({
         const id = getCaller();
         try {
             const account = await _connectAccount(); // createAccount랑 같음
+            console.log({ account });
             if (!account) {
                 return Err({
                     InvalidUser: id,
@@ -211,7 +210,7 @@ export default Canister({
                 creator: caller,
                 deadline,
             };
-          
+
             try {
                 const success = await _payRewardToken(reward);
                 if (!success) {

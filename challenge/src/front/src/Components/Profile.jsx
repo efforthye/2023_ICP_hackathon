@@ -101,9 +101,265 @@ const Profile = () => {
                             </OverlayBox>
                         </ChallengeBoxWrap>
                     </ContentAndOverlayWrap>
+                    <ContentAndOverlayWrap>
+                        <ChallengeBoxWrap>
+                            <ChallengeBox className="original">
+                                <ContentWrap>
+                                    <TitleText>이거이거 해주세용</TitleText>
+                                    <DescText>
+                                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                    </DescText>
+                                </ContentWrap>
+                                <EtcWrap>
+                                    <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                    <div>
+                                        <TimeWrap>
+                                            <TimeText>creater</TimeText>
+                                            <Time>박혜림</Time>
+                                        </TimeWrap>
+                                        <TimeWrap>
+                                            <TimeText>participants</TimeText>
+                                            <Time>{10}명 참여</Time>
+                                        </TimeWrap>
+                                    </div>
+                                </EtcWrap>
+                            </ChallengeBox>
+                            <OverlayBox className="overlay">
+                                <OverlayText>
+                                    <TimeWrap>
+                                        <TimeText>챌린지 시작일</TimeText>
+                                        <Time>time</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>챌린지 마감일</TimeText>
+                                        <Time>time</Time>
+                                    </TimeWrap>
+                                    <DetailText>내용 내용 내용...</DetailText>
+                                </OverlayText>
+                            </OverlayBox>
+                        </ChallengeBoxWrap>
+                    </ContentAndOverlayWrap>
+                    <ContentAndOverlayWrap>
+                        <ChallengeBoxWrap>
+                            <ChallengeBox className="original">
+                                <ContentWrap>
+                                    <TitleText>이거이거 해주세용</TitleText>
+                                    <DescText>
+                                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                    </DescText>
+                                </ContentWrap>
+                                <EtcWrap>
+                                    <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                                    <div>
+                                        <TimeWrap>
+                                            <TimeText>creater</TimeText>
+                                            <Time>박혜림</Time>
+                                        </TimeWrap>
+                                        <TimeWrap>
+                                            <TimeText>participants</TimeText>
+                                            <Time>{10}명 참여</Time>
+                                        </TimeWrap>
+                                    </div>
+                                </EtcWrap>
+                            </ChallengeBox>
+                            <OverlayBox className="overlay">
+                                <OverlayText>
+                                    <TimeWrap>
+                                        <TimeText>챌린지 시작일</TimeText>
+                                        <Time>time</Time>
+                                    </TimeWrap>
+                                    <TimeWrap>
+                                        <TimeText>챌린지 마감일</TimeText>
+                                        <Time>time</Time>
+                                    </TimeWrap>
+                                    <DetailText>내용 내용 내용...</DetailText>
+                                </OverlayText>
+                            </OverlayBox>
+                        </ChallengeBoxWrap>
+                    </ContentAndOverlayWrap>
                 </ChallengeAllWrap>
 
                 <LatestText>참여중인 챌린지</LatestText>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>이거이거 해주세용</TitleText>
+                            <DescText>
+                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <DetailText>내용 내용 내용...</DetailText>
+                        </OverlayText>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>이거이거 해주세용</TitleText>
+                            <DescText>
+                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <DetailText>내용 내용 내용...</DetailText>
+                        </OverlayText>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>이거이거 해주세용</TitleText>
+                            <DescText>
+                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <DetailText>내용 내용 내용...</DetailText>
+                        </OverlayText>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>이거이거 해주세용</TitleText>
+                            <DescText>
+                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <DetailText>내용 내용 내용...</DetailText>
+                        </OverlayText>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
+                <ChallengeBoxWrap>
+                    <ChallengeBox className="original">
+                        <ContentWrap>
+                            <TitleText>이거이거 해주세용</TitleText>
+                            <DescText>
+                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </DescText>
+                        </ContentWrap>
+                        <EtcWrap>
+                            <EightDFCWrap>{1000} DFC</EightDFCWrap>
+                            <div>
+                                <TimeWrap>
+                                    <TimeText>creater</TimeText>
+                                    <Time>박혜림</Time>
+                                </TimeWrap>
+                                <TimeWrap>
+                                    <TimeText>participants</TimeText>
+                                    <Time>{10}명 참여</Time>
+                                </TimeWrap>
+                            </div>
+                        </EtcWrap>
+                    </ChallengeBox>
+                    <OverlayBox className="overlay">
+                        <OverlayText>
+                            <TimeWrap>
+                                <TimeText>챌린지 시작일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <TimeWrap>
+                                <TimeText>챌린지 마감일</TimeText>
+                                <Time>time</Time>
+                            </TimeWrap>
+                            <DetailText>내용 내용 내용...</DetailText>
+                        </OverlayText>
+                    </OverlayBox>
+                </ChallengeBoxWrap>
                 <ChallengeBoxWrap>
                     <ChallengeBox className="original">
                         <ContentWrap>
