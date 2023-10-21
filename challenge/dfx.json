@@ -2,7 +2,7 @@
     "canisters": {
         "challenge": {
             "type": "custom",
-            "main": "src/challenge.ts",
+            "main": "src/canisters/challenge.ts",
             "candid": "src/dids/challenge.did",
             "build": "npx azle challenge",
             "wasm": ".azle/challenge/challenge.wasm",
@@ -11,13 +11,26 @@
                 "output": "src/front/declarations/challenge"
             }
         },
+        "token": {
+            "type": "custom",
+            "main": "src/canisters/token.ts",
+            "candid": "src/dids/token.did",
+            "build": "npx azle token",
+            "wasm": ".azle/token/token.wasm",
+            "gzip": true,
+            "declarations": {
+                "output": "src/front/declarations/token"
+            }
+        },
         "front": {
-            "dependencies": ["challenge"],
+            "type": "assets",
+            "candid": "src/dids/front.did",
+            "main": "src/front/index.html",
+            "build": "npx azle front",
             "front": {
-                "entrypoint": "src/front/src/index.js"
+                "entrypoint": "src/front/index.html"
             },
-            "source": ["src/front/public", "src/front/dist"],
-            "type": "assets"
+            "source": ["src/front/public", "src/front/build", "src/front/dist"]
         },
         "icrc1_ledger_canister": {
             "type": "custom",
