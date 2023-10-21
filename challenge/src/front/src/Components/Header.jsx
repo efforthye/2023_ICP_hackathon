@@ -55,6 +55,7 @@ const Header = () => {
     const [login, setLogin] = useState(false);
     const [modal, setModal] = useState(false);
     const [principal, setPrincipal] = useState();
+    console.log({ TokenCanister, ChallengeCanister });
 
     return (
         <Connect2ICProvider client={client}>
