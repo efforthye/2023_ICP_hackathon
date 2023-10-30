@@ -71,7 +71,7 @@ $ npm run start
 
 ![service](.frontend_exam/assets/architecture.png)
 
--   `challenge`, `token` canister를 통해 서버를 구현하였습니다.
+-   `challenge`, `token` canister를 통해 stable memory를 활용하여 서버를 구현하였습니다.
 -   `challenge` canister 는 챌린지 생성, 참가, 보상 등이 구현되어 있습니다.
 -   `token` canister 는 계정 생성 / 삭제, 토큰 전송 / 승인 / 발행 / 소각 기능이 구현되어 있습니다.
 
