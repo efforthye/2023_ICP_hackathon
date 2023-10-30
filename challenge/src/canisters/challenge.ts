@@ -136,7 +136,6 @@ export default Canister({
                 });
             }
         } catch (err) {
-            console.log(err);
             return Err({
                 ConnectionError: id,
             });
@@ -236,7 +235,6 @@ export default Canister({
                 // user publishing에 new challenge push
                 user.publishChallengeIds.push(challengeId);
                 users.insert(user.id, user);
-                console.log('\n챌린지 성공 아이디:' + challengeId + '\n');
                 // deadline만큼의 시간이 지나면 expireChallenge를 호출하는 타이머 설정
                 // TODO - test 되는지 꼭 해봐야함.
                 const timerDuration = deadline;
@@ -246,7 +244,6 @@ export default Canister({
                 });
                 return Ok(challengeId); // Return challenge ID
             } catch (err) {
-                console.log(err);
                 return Err({
                     ConnectionError: caller,
                 });
@@ -284,7 +281,7 @@ export default Canister({
             });
         }
         const id = challenge.responses.length + 1;
-        console.log('챌린지 개수:' + id);
+        console.log('챌린지에 대한 response 개수:' + id);
         const newResponse = {
             id, // 응답 ID 생성.
             title, // 실제로 사용자의 응답 제목 필요
@@ -318,7 +315,6 @@ export default Canister({
         }
         //챌린지 소유자가 아니면 Err
         if (caller.toString() !== challenge.creator.toString()) {
-            console.log('크리에이터' + challenge.creator + '유저' + caller);
             return Err({
                 UserNotCreator: caller,
             });
@@ -352,7 +348,6 @@ export default Canister({
             challenges.insert(challengeId, challenge);
             users.insert(rewardedUser.id, rewardedUser);
         } catch (err) {
-            console.log(err);
             return Err({
                 ConnectionError: challengeId,
             });
@@ -399,7 +394,6 @@ export default Canister({
 function getCaller(): Principal {
     const caller = ic.caller();
     if (caller === null) {
-        console.log('Caller is null');
         throw new Error('Caller is null');
     }
     return caller;
@@ -456,10 +450,9 @@ async function _expireChallenge(challengeId: Principal): Promise<Result<true, ty
         }
         challenge.ongoing = false;
         challenges.insert(challengeId, challenge);
-        console.log('Done!');
+        console.log('만료된 챌린지 handling 완료!');
         return Ok(true);
     } catch (err) {
-        console.log(err);
         return Err({
             ConnectionError: challengeId,
         });
