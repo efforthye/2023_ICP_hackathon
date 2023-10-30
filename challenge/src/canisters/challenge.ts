@@ -15,17 +15,11 @@ import {
     Result,
     Variant,
     query,
-    int,
     int8,
 } from 'azle';
 
 import TokenCanister from './token';
-/*
-지식인 -> 1명 채택
-
-deadline안에 아무도 글 안달면 환불
-deadline안에 채택 안하면 단 애들 엔빵
-*/
+const TOKENADDRESS = 'bw4dl-smaaa-aaaaa-qaacq-cai';
 
 const User = Record({
     /*
@@ -38,8 +32,8 @@ const User = Record({
      **/
     id: Principal,
     createdAt: nat64,
-    publishingChallengeIds: Vec(Principal),
-    participatingChallengeIds: Vec(Principal),
+    publishChallengeIds: Vec(Principal),
+    participateChallengeIds: Vec(Principal),
     rewardedChallengeIds: Vec(Principal),
     username: text,
 });
@@ -107,38 +101,40 @@ const TokenError = Variant({
     InsufficientToken: Principal,
 });
 
-const tokenCanister = TokenCanister(Principal.fromText('be2us-64aaa-aaaaa-qaabq-cai'));
 /* stable memory */
 let users = StableBTreeMap(Principal, User, 0);
 let challenges = StableBTreeMap(Principal, Challenge, 1);
-
-let tokenCanister: typeof TokenCanister;
-const tokenCanisterAddress = TokenCanister(Principal.fromText('be2us-64aaa-aaaaa-qaabq-cai'));
+//token캐니스터 주소
+const tokenCanisterAddress = TokenCanister(Principal.fromText(TOKENADDRESS));
 
 export default Canister({
-    // * TODO : init code 작성c
-
     createUser: update([text], Result(Principal, ChallengeError), async (username) => {
-        // identity 관련 로직 마련되면 바꿔야 함. id 중복.
         const id = getCaller();
         try {
-            const account = await _connectAccount(); // createAccount랑 같음
-            console.log({ account });
+            const account = await _connectAccount(id); // createAccount랑 같음
             if (!account) {
                 return Err({
                     InvalidUser: id,
                 });
             }
-            const user: typeof User = {
-                id,
-                createdAt: ic.time(),
-                publishingChallengeIds: [],
-                participatingChallengeIds: [],
-                rewardedChallengeIds: [],
-                username,
-            };
-            users.insert(user.id, user);
-            return Ok(user.id);
+            const userOpt = users.get(id);
+            //user 없으면 생성
+            if ('None' in userOpt) {
+                const user: typeof User = {
+                    id,
+                    createdAt: ic.time(),
+                    publishChallengeIds: [],
+                    participateChallengeIds: [],
+                    rewardedChallengeIds: [],
+                    username,
+                };
+                users.insert(user.id, user);
+                return Ok(user.id);
+            } else {
+                return Err({
+                    UserAlreadyExist: id,
+                });
+            }
         } catch (err) {
             console.log(err);
             return Err({
@@ -153,7 +149,14 @@ export default Canister({
         return users.get(id);
     }),
     deleteUser: update([Principal], Result(User, ChallengeError), (id) => {
+        const caller = getCaller();
+        if (caller !== id) {
+            return Err({
+                InvalidUser: id,
+            });
+        }
         const userOpt = users.get(id);
+
         if ('None' in userOpt) {
             return Err({
                 UserDoesNotExist: id,
@@ -162,7 +165,7 @@ export default Canister({
 
         const user = userOpt.Some;
         // 유저가 만든 챌린지를 모두 삭제
-        for (const challengeId of user.publishingChallengeIds) {
+        for (const challengeId of user.publishChallengeIds) {
             const challengeOpt = challenges.get(challengeId);
             if ('None' in challengeOpt) {
                 continue;
@@ -177,7 +180,7 @@ export default Canister({
         }
 
         // 유저가 참여하고 있는 챌린지에서 response 삭제
-        for (const challengeId of user.participatingChallengeIds) {
+        for (const challengeId of user.participateChallengeIds) {
             const challengeOpt = challenges.get(challengeId);
             if ('None' in challengeOpt) {
                 continue;
@@ -195,7 +198,6 @@ export default Canister({
         return Ok(user);
     }),
     createChallenge: update(
-        // 시간단위 int...? => 1초 = 10^9
         [text, text, nat64, nat64],
         Result(Principal, ChallengeError),
         async (title, description, reward, deadline) => {
@@ -216,7 +218,13 @@ export default Canister({
             };
 
             try {
-                const success = await _payRewardToken(reward);
+                const userOpt = users.get(caller);
+                if ('None' in userOpt) {
+                    return Err({
+                        UserDoesNotExist: caller,
+                    });
+                }
+                const success = await _payRewardToken(caller, reward);
                 if (!success) {
                     return Err({
                         InsufficientToken: caller,
@@ -224,17 +232,11 @@ export default Canister({
                 }
                 // challenge 추가
                 challenges.insert(challengeId, newChallenge);
-                const userOpt = users.get(caller);
-                if ('None' in userOpt) {
-                    return Err({
-                        UserDoesNotExist: caller,
-                    });
-                }
                 const user = userOpt.Some;
                 // user publishing에 new challenge push
-                user.publishingChallengeIds.push(challengeId);
+                user.publishChallengeIds.push(challengeId);
                 users.insert(user.id, user);
-                console.log('\n' + challengeId + '\n');
+                console.log('\n챌린지 성공 아이디:' + challengeId + '\n');
                 // deadline만큼의 시간이 지나면 expireChallenge를 호출하는 타이머 설정
                 // TODO - test 되는지 꼭 해봐야함.
                 const timerDuration = deadline;
@@ -242,7 +244,6 @@ export default Canister({
                 ic.setTimer(timerDuration, async () => {
                     await _expireChallenge(expiredId);
                 });
-
                 return Ok(challengeId); // Return challenge ID
             } catch (err) {
                 console.log(err);
@@ -252,9 +253,8 @@ export default Canister({
             }
         }
     ),
-    joinChallenge: update([text, text, text], Result(bool, ChallengeError), (title, contents, challengeid) => {
+    joinChallenge: update([text, text, Principal], Result(bool, ChallengeError), (title, contents, challengeId) => {
         const caller = getCaller();
-        const challengeId = Principal.fromText(challengeid);
         const userOpt = users.get(caller);
         // caller가 유저가 아니라면 Err
         if ('None' in userOpt) {
@@ -277,9 +277,16 @@ export default Canister({
                 ChallengeFinished: challengeId,
             });
         }
-        // 챌린지에 참여하지 않고 있다면 push.
+        // 챌린지 publisher라면 Error
+        if (caller === challenge.creator) {
+            return Err({
+                InvalidUser: caller,
+            });
+        }
+        const id = challenge.responses.length + 1;
+        console.log('챌린지 개수:' + id);
         const newResponse = {
-            id: 1, // 응답 ID 생성.
+            id, // 응답 ID 생성.
             title, // 실제로 사용자의 응답 제목 필요
             contents, // 실제로 사용자의 응답 내용 필요
             responderId: caller,
@@ -289,11 +296,12 @@ export default Canister({
         challenge.responses.push(newResponse);
         challenges.insert(challengeId, challenge);
         //해당 user의 participating response 추기
-        user.participatingChallengeIds.push(challengeId);
+        user.participateChallengeIds.push(challengeId);
+        users.insert(user.id, user);
         return Ok(true);
     }),
     rewardParticipant: update([Principal, int8], Result(bool, ChallengeError), async (challengeId, responseId) => {
-        const user = getCaller();
+        const caller = getCaller();
         //챌린지 없으면 Err
         const challengeOpt = challenges.get(challengeId);
         if ('None' in challengeOpt) {
@@ -309,9 +317,10 @@ export default Canister({
             });
         }
         //챌린지 소유자가 아니면 Err
-        if (challenge.creator !== user) {
+        if (caller.toString() !== challenge.creator.toString()) {
+            console.log('크리에이터' + challenge.creator + '유저' + caller);
             return Err({
-                UserNotCreator: user,
+                UserNotCreator: caller,
             });
         }
         try {
@@ -322,14 +331,25 @@ export default Canister({
                     ResponseDoesNotExist: responseId,
                 });
             }
-            const rewardedUser = adoptResponse.responderId;
-
-            const transfer = await _transferReward(rewardedUser, challenge.reward);
-            if (!transfer) {
+            const rewardedUserOpt = users.get(adoptResponse.responderId);
+            //rewardedUser가 없다면, Error
+            if ('None' in rewardedUserOpt) {
                 return Err({
-                    InvalidUser: rewardedUser,
+                    UserDoesNotExist: adoptResponse.responderId,
                 });
             }
+            const rewardedUser = rewardedUserOpt.Some;
+
+            const transfer = await _transferReward(rewardedUser.id, challenge.reward);
+            if (!transfer) {
+                return Err({
+                    InvalidUser: rewardedUser.id,
+                });
+            }
+            challenge.ongoing = false;
+            rewardedUser.rewardedChallengeIds.push(challenge.id);
+            challenge.completed.push(rewardedUser);
+            challenges.insert(challengeId, challenge);
         } catch (err) {
             console.log(err);
             return Err({
@@ -339,11 +359,9 @@ export default Canister({
 
         return Ok(true);
     }),
-
-    // * TODO : Expire되면, 반환로직 구현
-    //refundReward: update([], ,()),
-
-    // 자기가 참가한 챌린지 목록 반환하는 method
+    getChallenges: query([], Vec(Challenge), () => {
+        return challenges.values();
+    }),
     getChallengesByParticipant: query([], Vec(Challenge), () => {
         const user = getCaller();
         const challengesByParticipant = challenges
@@ -399,17 +417,15 @@ async function _transferReward(to: Principal, amount: nat64): Promise<Result<boo
     });
 }
 //추가
-async function _connectAccount(): Promise<boolean> {
-
-    return await ic.call(tokenCanisterAddress.connectAcount, {
-
-        args: [],
+async function _connectAccount(id: Principal): Promise<boolean> {
+    return await ic.call(tokenCanisterAddress.connectAccount, {
+        args: [id],
     });
 }
 //추가
-async function _payRewardToken(amount: nat64): Promise<Result<boolean, typeof TokenError>> {
+async function _payRewardToken(from: Principal, amount: nat64): Promise<Result<boolean, typeof TokenError>> {
     return await ic.call(tokenCanisterAddress.payToAdmin, {
-        args: [amount],
+        args: [from, amount],
     });
 }
 
@@ -422,7 +438,6 @@ async function _expireChallenge(challengeId: Principal): Promise<Result<true, ty
     }
 
     const challenge = challengeOpt.Some;
-    challenge.ongoing = false;
 
     try {
         // 보상 분배 로직
@@ -432,25 +447,11 @@ async function _expireChallenge(challengeId: Principal): Promise<Result<true, ty
             for (const response of challenge.responses) {
                 const participantId = response.responderId;
                 await _transferReward(participantId, BigInt(rewardPerParticipant));
-                // 보상 받은 사용자를 completed 배열에 추가
-                const userOpt = users.get(participantId);
-                if ('None' in userOpt) {
-                    return Err({
-                        UserDoesNotExist: participantId,
-                    });
-                }
-                const user = userOpt.Some;
-                challenge.completed.push(user);
-                //user의 participating array에 해당 챌린지 제거
-                const index = user.participatingChallengeIds.indexOf(challengeId);
-                if (index !== -1) {
-                    user.participatingChallengeIds.splice(index, 1);
-                }
-                users.insert(participantId, user);
             }
-            challenges.insert(challengeId, challenge);
         }
         // 챌린지 종료 및 보상 분배가 성공적으로 완료된 경우 true 반환
+        challenge.ongoing = false;
+        challenges.insert(challengeId, challenge);
         console.log('expired!');
         return Ok(true);
     } catch (err) {

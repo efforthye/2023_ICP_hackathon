@@ -18,7 +18,6 @@ import {
 } from 'azle';
 
 const FREE_TOKEN = 1_000n;
-const BURNING_ACCOUNT_ID = Principal.fromUint8Array(new Uint8Array([0]));
 
 const Allowances = Record({
     spender: Principal,
@@ -75,10 +74,9 @@ export default Canister({
         return Ok(caller);
     }),
 
-    connectAccount: update([], bool, () => {
-        const user = getCaller();
-        if (!findAccount(user)) {
-            generateAccount(user);
+    connectAccount: update([Principal], bool, (id) => {
+        if (!findAccount(id)) {
+            generateAccount(id);
         }
         return true;
     }),
@@ -168,18 +166,19 @@ export default Canister({
     }),
 
     // * TODO : CHECK
-    payToAdmin: update([nat64], Result(bool, TokenError), (amount) => {
-        const fromAddress = getCaller();
-        const fromAccountOpt = getAccountByAddress(fromAddress);
+    payToAdmin: update([Principal, nat64], Result(bool, TokenError), (from, amount) => {
+        const fromAccountOpt = getAccountByAddress(from);
         if ('None' in fromAccountOpt) {
             return Err({
-                AccountDoesNotExist: fromAddress,
+                AccountDoesNotExist: from,
             });
         }
         const fromAccount = fromAccountOpt.Some;
         const bigIntAmount = BigInt(amount);
         if (!fromAccount || fromAccount.balance < bigIntAmount) {
-            return Ok(false);
+            return Err({
+                InsufficientToken: fromAccount.address,
+            });
         }
         const adminAccountOpt = getAccountByAddress(tokenInfo.owner);
         if ('None' in adminAccountOpt) {
@@ -190,7 +189,7 @@ export default Canister({
         const adminAccount = adminAccountOpt.Some;
         fromAccount.balance -= bigIntAmount;
         adminAccount.balance += bigIntAmount;
-        insertAccount(fromAddress, fromAccount);
+        insertAccount(from, fromAccount);
         insertAccount(tokenInfo.owner, adminAccount);
         return Ok(true);
     }),
@@ -222,52 +221,6 @@ export default Canister({
 
         return Ok(true);
     }),
-
-    // * TODO : CHECK
-    /* burn: update([Principal, nat64], Result(bool, TokenError), (from, amount) => {
-        const caller = getCaller();
-        // burn 함수는 admin인 계정만 호출할 수 있습니다.
-        if (caller !== tokenInfo.owner) {
-            return Err({
-                OnlyAdminAccess: caller,
-            });
-        }
-
-        const fromAccountOpt = getAccountByAddress(from);
-        if ('None' in fromAccountOpt) {
-            return Err({
-                AccountDoesNotExist: from,
-            });
-        }
-        const fromAccount = fromAccountOpt.Some;
-
-        if (fromAccount.balance < amount) {
-            return Err({
-                InsufficientToken: from,
-            });
-        }
-        // from에서 0이라는 주소(없는 ㅈ소)로 amount 보내기
-        let burningAccount;
-        const burningAccountOpt = getAccountByAddress(BURNING_ACCOUNT_ID);
-        if ('None' in burningAccountOpt) {
-            const newBurningAccount: typeof Account = {
-                address: BURNING_ACCOUNT_ID,
-                balance: 0n,
-            };
-            burningAccount = insertAccount(BURNING_ACCOUNT_ID, newBurningAccount);
-        } else {
-            burningAccount = burningAccountOpt.Some;
-        }
-
-        burningAccount.balance += amount;
-        fromAccount.balance -= amount;
-        tokenInfo.totalSupply -= amount; // 전체 토큰에서 양 빼기
-
-        insertAccount(from, fromAccount);
-        insertAccount(BURNING_ACCOUNT_ID, burningAccount);
-        return Ok(true);
-    }),
-*/
     allowance: query([Principal, Principal], nat64, (owner, spender) => {
         return _allowance(owner, spender);
     }),
@@ -398,19 +351,3 @@ function generateAccount(address: Principal): bool {
 }
 
 // ??
-/*
-function findOrCreateWallet(address: Principal): bool {
-    let tempAccount: typeof Account;
-    const AccountOpt = getAccountByAddress(address);
-    if ('None' in AccountOpt) {
-        const newAccount = {
-            address: Principal,
-            balance: FREE_TOKEN,
-            allowances: [],
-        };
-        tempAccount = insertAccount(address, newAccount);
-    } else {
-        tempAccount = AccountOpt.Some;
-    }
-}
-*/
