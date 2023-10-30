@@ -19,7 +19,7 @@ import {
 } from 'azle';
 
 import TokenCanister from './token';
-const TOKENADDRESS = 'bw4dl-smaaa-aaaaa-qaacq-cai';
+const TOKENADDRESS = 'avqkn-guaaa-aaaaa-qaaea-cai';
 
 const User = Record({
     /*
@@ -225,7 +225,7 @@ export default Canister({
                     });
                 }
                 const success = await _payRewardToken(caller, reward);
-                if (!success) {
+                if (success.Err) {
                     return Err({
                         InsufficientToken: caller,
                     });
@@ -350,6 +350,7 @@ export default Canister({
             rewardedUser.rewardedChallengeIds.push(challenge.id);
             challenge.completed.push(rewardedUser);
             challenges.insert(challengeId, challenge);
+            users.insert(rewardedUser.id, rewardedUser);
         } catch (err) {
             console.log(err);
             return Err({
@@ -449,10 +450,13 @@ async function _expireChallenge(challengeId: Principal): Promise<Result<true, ty
                 await _transferReward(participantId, BigInt(rewardPerParticipant));
             }
         }
-        // 챌린지 종료 및 보상 분배가 성공적으로 완료된 경우 true 반환
+        // 만약 아무도 안달면 환불
+        else {
+            await _transferReward(challenge.creator, challenge.reward);
+        }
         challenge.ongoing = false;
         challenges.insert(challengeId, challenge);
-        console.log('expired!');
+        console.log('Done!');
         return Ok(true);
     } catch (err) {
         console.log(err);

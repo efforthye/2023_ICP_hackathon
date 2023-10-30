@@ -174,8 +174,7 @@ export default Canister({
             });
         }
         const fromAccount = fromAccountOpt.Some;
-        const bigIntAmount = BigInt(amount);
-        if (!fromAccount || fromAccount.balance < bigIntAmount) {
+        if (fromAccount.balance < amount) {
             return Err({
                 InsufficientToken: fromAccount.address,
             });
@@ -187,8 +186,8 @@ export default Canister({
             });
         }
         const adminAccount = adminAccountOpt.Some;
-        fromAccount.balance -= bigIntAmount;
-        adminAccount.balance += bigIntAmount;
+        fromAccount.balance -= amount;
+        adminAccount.balance += amount;
         insertAccount(from, fromAccount);
         insertAccount(tokenInfo.owner, adminAccount);
         return Ok(true);
@@ -349,5 +348,3 @@ function generateAccount(address: Principal): bool {
     insertAccount(address, newAccount);
     return true;
 }
-
-// ??
