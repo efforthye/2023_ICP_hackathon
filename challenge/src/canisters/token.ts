@@ -217,7 +217,7 @@ export default Canister({
             insertAccount(to, toAccount);
         }
 
-        tokenInfo.totalSupply += amount; // 전체 발행된 토큰의 양 추가
+        tokenInfo.totalSupply += amount; // 전체 발행된 토큰의 양 add
 
         return Ok(true);
     }),

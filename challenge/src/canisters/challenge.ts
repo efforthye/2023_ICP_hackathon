@@ -193,7 +193,7 @@ export default Canister({
             });
         }
 
-        // 유저 삭제
+        // 유저 delete
         users.remove(id);
         return Ok(user);
     }),
